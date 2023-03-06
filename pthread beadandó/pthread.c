@@ -34,12 +34,10 @@ int main() {
     thread_data thread_args[NUM_THREADS];
     pthread_mutex_init(&mutex, NULL);
 
-    // Filling the array with random numbers
     for (int i = 0; i < ARRAY_SIZE; i++) {
         array[i] = rand() % 100;
     }
 
-    // Creating threads to sum the array
     for (int i = 0; i < NUM_THREADS; i++) {
         thread_args[i].thread_id = i;
         thread_args[i].start_index = i * (ARRAY_SIZE / NUM_THREADS);
@@ -48,7 +46,6 @@ int main() {
         pthread_create(&threads[i], NULL, sum_array, &thread_args[i]);
     }
 
-    // Waiting for threads to finish
     for (int i = 0; i < NUM_THREADS; i++) {
         pthread_join(threads[i], NULL);
     }

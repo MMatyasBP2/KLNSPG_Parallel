@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-int primes(int lower, int upper);
+int CountPrimes(int lower, int upper);
 
 int main() {
 
@@ -11,12 +11,12 @@ int main() {
     printf("Please give me the upper number: ");
     scanf("%d", &upper);
 
-    printf("Number of primes on the interval [%d,%d] is: %d", lower, upper, primes(lower, upper));
+    printf("Number of primes on the interval [%d,%d] is: %d", lower, upper, CountPrimes(lower, upper));
 
     return 0;
 }
 
-int primes(int lower, int upper){
+int CountPrimes(int lower, int upper){
     
     int primes = 0;
 

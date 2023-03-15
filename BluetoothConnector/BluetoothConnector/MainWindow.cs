@@ -19,6 +19,16 @@ namespace BluetoothConnector
             InitializeComponent();
         }
 
+        /// <summary>
+        /// TODO:
+        /// - Reset DeviceBox
+        /// - ProgressBar Async working while Bluetooth discovering
+        /// - Async connection started
+        /// - Async message send and receive function
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+
         private void SearchButton_Click(object sender, EventArgs e)
         {
             com.DiscoveringList.Clear();

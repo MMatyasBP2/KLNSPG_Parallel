@@ -33,10 +33,17 @@ namespace BluetoothConnector
         {
             com.DiscoveringList.Clear();
             DevicesBox.DataSource = null;
+            DiscoveringProgressbar.Value = 0;
 
-            DiscoveringProgressbar.Visible = true;
             com.DiscoverDevices();
             DevicesBox.DataSource = com.DiscoveringList;
+            
+            
+            if (com.DiscoveringList.Count != 0)
+            {
+                DiscoveringProgressbar.Visible = true;
+                DiscoveringProgressbar.Value = 100;
+            }
         }
     }
 }

@@ -16,7 +16,6 @@ namespace BluetoothConnector
 {
     public class Communication
     {
-        public List<int> DiscoveringProgressBar = new List<int>();
         public List<string> DiscoveringList = new List<string>();
         private readonly BluetoothClient _bluetoothClient = new BluetoothClient();
 

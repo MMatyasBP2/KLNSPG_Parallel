@@ -17,7 +17,7 @@ namespace BluetoothConnector
     public class Communication
     {
         public List<string> DiscoveringList = new List<string>();
-        private readonly BluetoothClient _bluetoothClient = new BluetoothClient();
+        private readonly BluetoothClient Client = new BluetoothClient();
 
         public void DiscoverDevices()
         {
@@ -25,7 +25,7 @@ namespace BluetoothConnector
 
             try
             {
-                devices = _bluetoothClient.DiscoverDevices();
+                devices = Client.DiscoverDevices();
 
                 foreach (var item in devices)
                 {
@@ -42,11 +42,11 @@ namespace BluetoothConnector
         {
             try
             {
-                BluetoothDeviceInfo[] devices = await Task.Run(() => _bluetoothClient.DiscoverDevices());
+                BluetoothDeviceInfo[] devices = await Task.Run(() => Client.DiscoverDevices());
                 BluetoothDeviceInfo device = devices[0];
-                await Task.Run(() => _bluetoothClient.Connect(device.DeviceAddress, BluetoothService.SerialPort));
+                await Task.Run(() => Client.Connect(device.DeviceAddress, BluetoothService.SerialPort));
 
-                Stream stream = _bluetoothClient.GetStream();
+                Stream stream = Client.GetStream();
                 await SendMessageAsync(stream, "Hello, Bluetooth device!");
                 string response = await ReceiveMessageAsync(stream);
 
@@ -58,7 +58,7 @@ namespace BluetoothConnector
             }
             finally
             {
-                _bluetoothClient.Close();
+                Client.Close();
             }
         }
 

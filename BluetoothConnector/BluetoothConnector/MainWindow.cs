@@ -13,7 +13,7 @@ namespace BluetoothConnector
 {
     public partial class MainWindow : Form
     {
-        private Communication com = new Communication();
+        private readonly Communication Com = new Communication();
         public MainWindow()
         {
             InitializeComponent();
@@ -31,15 +31,15 @@ namespace BluetoothConnector
 
         private void SearchButton_Click(object sender, EventArgs e)
         {
-            com.DiscoveringList.Clear();
+            Com.DiscoveringList.Clear();
             DevicesBox.DataSource = null;
             DiscoveringProgressbar.Value = 0;
 
-            com.DiscoverDevices();
-            DevicesBox.DataSource = com.DiscoveringList;
+            Com.DiscoverDevices();
+            DevicesBox.DataSource = Com.DiscoveringList;
             
             
-            if (com.DiscoveringList.Count != 0)
+            if (Com.DiscoveringList.Count != 0)
             {
                 DiscoveringProgressbar.Visible = true;
                 DiscoveringProgressbar.Value = 100;

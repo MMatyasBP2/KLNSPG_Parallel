@@ -32,6 +32,8 @@ namespace BluetoothConnector
         private void SearchButton_Click(object sender, EventArgs e)
         {
             com.DiscoveringList.Clear();
+            DevicesBox.DataSource = null;
+
             DiscoveringProgressbar.Visible = true;
             com.DiscoverDevices();
             DevicesBox.DataSource = com.DiscoveringList;

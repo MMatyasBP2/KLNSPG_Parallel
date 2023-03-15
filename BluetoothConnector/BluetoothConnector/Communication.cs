@@ -10,43 +10,44 @@ using InTheHand.Net.Bluetooth;
 using InTheHand.Net.Bluetooth.AttributeIds;
 using InTheHand.Net.Bluetooth.Factory;
 using InTheHand.Net.Sockets;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace BluetoothConnector
 {
     public class Communication
     {
-        private readonly BluetoothClient bluetoothClient = new BluetoothClient();
-    
-        public async Task<string> DiscoverDevices()
+        public List<int> DiscoveringProgressBar = new List<int>();
+        public List<string> DiscoveringList = new List<string>();
+        private readonly BluetoothClient _bluetoothClient = new BluetoothClient();
+
+        public void DiscoverDevices()
         {
-            BluetoothDeviceInfo[] devices;
-            string devicesString = "";
+            BluetoothDeviceInfo[] devices = null;
+
             try
             {
-                devices = await Task.Run(() => bluetoothClient.DiscoverDevices());
+                devices = _bluetoothClient.DiscoverDevices();
 
-                foreach (BluetoothDeviceInfo device in devices)
+                foreach (var item in devices)
                 {
-                    devicesString += device.DeviceName + "\n";
+                    DiscoveringList.Add(item.DeviceName);
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                return null;
             }
-
-            return devicesString;
         }
+
         public async void Initialize()
         {
             try
             {
-                BluetoothDeviceInfo[] devices = await Task.Run(() => bluetoothClient.DiscoverDevices());
+                BluetoothDeviceInfo[] devices = await Task.Run(() => _bluetoothClient.DiscoverDevices());
                 BluetoothDeviceInfo device = devices[0];
-                await Task.Run(() => bluetoothClient.Connect(device.DeviceAddress, BluetoothService.SerialPort));
+                await Task.Run(() => _bluetoothClient.Connect(device.DeviceAddress, BluetoothService.SerialPort));
 
-                Stream stream = bluetoothClient.GetStream();
+                Stream stream = _bluetoothClient.GetStream();
                 await SendMessageAsync(stream, "Hello, Bluetooth device!");
                 string response = await ReceiveMessageAsync(stream);
 
@@ -58,7 +59,7 @@ namespace BluetoothConnector
             }
             finally
             {
-                bluetoothClient.Close();
+                _bluetoothClient.Close();
             }
         }
 

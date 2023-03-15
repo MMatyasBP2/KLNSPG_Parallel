@@ -7,20 +7,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace BluetoothConnector
 {
     public partial class MainWindow : Form
     {
-        Communication com = new Communication();
+        private Communication com = new Communication();
         public MainWindow()
         {
             InitializeComponent();
         }
 
-        private async void SearchButton_Click(object sender, EventArgs e)
+        private void SearchButton_Click(object sender, EventArgs e)
         {
-            DevicesBox.Items.Add(await com.DiscoverDevices());
+            com.DiscoveringList.Clear();
+            DiscoveringProgressbar.Visible = true;
+            com.DiscoverDevices();
+            DevicesBox.DataSource = com.DiscoveringList;
         }
     }
 }

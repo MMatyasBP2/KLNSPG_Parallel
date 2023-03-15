@@ -32,7 +32,7 @@
             this.MainTitle = new System.Windows.Forms.Label();
             this.SearchButton = new System.Windows.Forms.Button();
             this.ConnectButton = new System.Windows.Forms.Button();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.DiscoveringProgressbar = new System.Windows.Forms.ProgressBar();
             this.DevicesBox = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
@@ -59,19 +59,20 @@
             // 
             // ConnectButton
             // 
-            this.ConnectButton.Location = new System.Drawing.Point(249, 459);
+            this.ConnectButton.Location = new System.Drawing.Point(249, 169);
             this.ConnectButton.Name = "ConnectButton";
             this.ConnectButton.Size = new System.Drawing.Size(107, 38);
             this.ConnectButton.TabIndex = 2;
             this.ConnectButton.Text = "Connect";
             this.ConnectButton.UseVisualStyleBackColor = true;
             // 
-            // progressBar1
+            // DiscoveringProgressbar
             // 
-            this.progressBar1.Location = new System.Drawing.Point(381, 474);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(407, 23);
-            this.progressBar1.TabIndex = 3;
+            this.DiscoveringProgressbar.Location = new System.Drawing.Point(381, 184);
+            this.DiscoveringProgressbar.Name = "DiscoveringProgressbar";
+            this.DiscoveringProgressbar.Size = new System.Drawing.Size(407, 23);
+            this.DiscoveringProgressbar.TabIndex = 3;
+            this.DiscoveringProgressbar.Visible = false;
             // 
             // DevicesBox
             // 
@@ -87,7 +88,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1132, 644);
             this.Controls.Add(this.DevicesBox);
-            this.Controls.Add(this.progressBar1);
+            this.Controls.Add(this.DiscoveringProgressbar);
             this.Controls.Add(this.ConnectButton);
             this.Controls.Add(this.SearchButton);
             this.Controls.Add(this.MainTitle);
@@ -104,7 +105,7 @@
         private System.Windows.Forms.Label MainTitle;
         private System.Windows.Forms.Button SearchButton;
         private System.Windows.Forms.Button ConnectButton;
-        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.ProgressBar DiscoveringProgressbar;
         private System.Windows.Forms.ComboBox DevicesBox;
     }
 }

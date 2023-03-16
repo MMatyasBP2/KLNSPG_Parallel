@@ -12,6 +12,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MathNet.Numerics.Distributions;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 
 namespace StatisticalApp
 {
@@ -33,7 +35,9 @@ namespace StatisticalApp
             StatBox.Clear();
 
             // read sample size from config file (here we use a constant instead)
-            const int sampleSize = 10;
+            string json = File.ReadAllText("appconfig.json");
+            dynamic jsonObj = JsonConvert.DeserializeObject(json);
+            int sampleSize = jsonObj.SampleCount;
 
             // create distribution
             var normal = Normal.WithMeanStdDev(0, 1);

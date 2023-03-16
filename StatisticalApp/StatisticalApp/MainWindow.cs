@@ -44,20 +44,16 @@ namespace StatisticalApp
                 dynamic jsonObj = JsonConvert.DeserializeObject(json);
                 _sampleSize = jsonObj.SampleCount;
 
-                // create distribution
                 var normal = Normal.WithMeanStdDev(0, 1);
 
-                // setup cancellation token
                 _cancellationTokenSource = new CancellationTokenSource();
 
                 for (int i = 0; i < _sampleSize; i++)
                 {
-                    // simulate samples
                     var samples = Enumerable.Range(0, _sampleSize)
                         .Select(_ => normal.Sample())
                         .ToList();
 
-                    // calculate statistics
                     var skewness = samples.Skewness();
                     var kurtosis = samples.Kurtosis();
                     var variance = samples.Variance();
@@ -67,7 +63,6 @@ namespace StatisticalApp
                     var min = samples.Min();
                     var max = samples.Max();
 
-                    // update results dictionary
                     _results["Skewness"] = $"{skewness:F4}";
                     _results["Kurtosis"] = $"{kurtosis:F4}";
                     _results["Variance"] = $"{variance:F4}";
@@ -77,7 +72,6 @@ namespace StatisticalApp
                     _results["Minimum"] = $"{min:F4}";
                     _results["Maximum"] = $"{max:F4}";
 
-                    // update results textbox
                     SampleBox.Text = string.Join(Environment.NewLine, _results.Select(kv => $"{kv.Key}: {kv.Value}"));
 
                     var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "results.txt");
@@ -89,10 +83,8 @@ namespace StatisticalApp
                         }
                     }
 
-                    // Delay for a short period of time to prevent UI from freezing
                     await Task.Delay(50);
 
-                    // check for cancellation
                     if (_cancellationTokenSource.Token.IsCancellationRequested)
                     {
                         break;

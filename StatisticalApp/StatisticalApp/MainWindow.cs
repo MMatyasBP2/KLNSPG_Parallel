@@ -14,13 +14,15 @@ using System.Windows.Forms;
 using MathNet.Numerics.Distributions;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace StatisticalApp
 {
     public partial class MainWindow : Form
     {
-        private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
+        private CancellationTokenSource _cancellationTokenSource;
         private readonly IDictionary<string, string> _results = new Dictionary<string, string>();
+        private int _sampleSize;
 
         public MainWindow()
         {
@@ -29,28 +31,38 @@ namespace StatisticalApp
 
         private async void StartButton_Click(object sender, EventArgs e)
         {
+            StatLabel.Visible = false;
+            StatBox.Visible = false;
             _results.Clear();
             SampleBox.Clear();
             StatBox.Clear();
 
-            string json = File.ReadAllText("appconfig.json");
-            dynamic jsonObj = JsonConvert.DeserializeObject(json);
-            int sampleSize = jsonObj.SampleCount;
-
-            // create distribution
-            var normal = Normal.WithMeanStdDev(0, 1);
-
             try
             {
+                string json = File.ReadAllText("appconfig.json");
+                dynamic jsonObj = JsonConvert.DeserializeObject(json);
+                _sampleSize = jsonObj.SampleCount;
+
+                // create distribution
+                var normal = Normal.WithMeanStdDev(0, 1);
+
+                // setup cancellation token
+                _cancellationTokenSource = new CancellationTokenSource();
+
                 while (true)
                 {
-                    _cancellationTokenSource.Token.ThrowIfCancellationRequested();
+                    // check for cancellation
+                    if (_results.Count >= _sampleSize)
+                    {
+                        break;
+                    }
 
-                    var samples = Enumerable.Range(0, sampleSize)
+                    // simulate samples
+                    var samples = Enumerable.Range(0, _sampleSize)
                         .Select(_ => normal.Sample())
                         .ToList();
 
-                    var medianAbsDev = samples.Median();
+                    // calculate statistics
                     var skewness = samples.Skewness();
                     var kurtosis = samples.Kurtosis();
                     var variance = samples.Variance();
@@ -60,8 +72,7 @@ namespace StatisticalApp
                     var min = samples.Min();
                     var max = samples.Max();
 
-                    _results["Sample size"] = $"{sampleSize}";
-                    _results["Median absolute deviation"] = $"{medianAbsDev:F4}";
+                    // update results dictionary
                     _results["Skewness"] = $"{skewness:F4}";
                     _results["Kurtosis"] = $"{kurtosis:F4}";
                     _results["Variance"] = $"{variance:F4}";
@@ -71,6 +82,7 @@ namespace StatisticalApp
                     _results["Minimum"] = $"{min:F4}";
                     _results["Maximum"] = $"{max:F4}";
 
+                    // update results textbox
                     SampleBox.Text = string.Join(Environment.NewLine, _results.Select(kv => $"{kv.Key}: {kv.Value}"));
 
                     var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "results.txt");
@@ -86,6 +98,8 @@ namespace StatisticalApp
             {
             }
 
+            StatLabel.Visible = true;
+            StatBox.Visible = true;
             StatBox.Text = string.Join(Environment.NewLine, _results.Select(kv => $"{kv.Key}: {kv.Value}"));
         }
 

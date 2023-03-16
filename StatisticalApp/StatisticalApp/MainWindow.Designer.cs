@@ -33,6 +33,7 @@
             this.SampleBox = new System.Windows.Forms.RichTextBox();
             this.StopButton = new System.Windows.Forms.Button();
             this.StatBox = new System.Windows.Forms.RichTextBox();
+            this.StatLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // MainTitle
@@ -59,7 +60,7 @@
             // 
             this.SampleBox.Location = new System.Drawing.Point(84, 189);
             this.SampleBox.Name = "SampleBox";
-            this.SampleBox.Size = new System.Drawing.Size(420, 388);
+            this.SampleBox.Size = new System.Drawing.Size(342, 388);
             this.SampleBox.TabIndex = 2;
             this.SampleBox.Text = "";
             // 
@@ -75,17 +76,30 @@
             // 
             // StatBox
             // 
-            this.StatBox.Location = new System.Drawing.Point(569, 189);
+            this.StatBox.Location = new System.Drawing.Point(557, 189);
             this.StatBox.Name = "StatBox";
-            this.StatBox.Size = new System.Drawing.Size(342, 213);
+            this.StatBox.Size = new System.Drawing.Size(304, 236);
             this.StatBox.TabIndex = 6;
             this.StatBox.Text = "";
+            this.StatBox.Visible = false;
+            // 
+            // StatLabel
+            // 
+            this.StatLabel.AutoSize = true;
+            this.StatLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.StatLabel.Location = new System.Drawing.Point(552, 131);
+            this.StatLabel.Name = "StatLabel";
+            this.StatLabel.Size = new System.Drawing.Size(93, 29);
+            this.StatLabel.TabIndex = 7;
+            this.StatLabel.Text = "Results";
+            this.StatLabel.Visible = false;
             // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1068, 628);
+            this.Controls.Add(this.StatLabel);
             this.Controls.Add(this.StatBox);
             this.Controls.Add(this.StopButton);
             this.Controls.Add(this.SampleBox);
@@ -105,6 +119,7 @@
         private System.Windows.Forms.RichTextBox SampleBox;
         private System.Windows.Forms.Button StopButton;
         private System.Windows.Forms.RichTextBox StatBox;
+        private System.Windows.Forms.Label StatLabel;
     }
 }
 

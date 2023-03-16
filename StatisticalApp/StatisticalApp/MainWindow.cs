@@ -22,6 +22,7 @@ namespace StatisticalApp
     {
         private CancellationTokenSource _cancellationTokenSource;
         private readonly IDictionary<string, string> _results = new Dictionary<string, string>();
+        private static readonly object FileLocking = new object();
         private int _sampleSize;
 
         public MainWindow()
@@ -80,9 +81,12 @@ namespace StatisticalApp
                     SampleBox.Text = string.Join(Environment.NewLine, _results.Select(kv => $"{kv.Key}: {kv.Value}"));
 
                     var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "results.txt");
-                    using (var writer = new StreamWriter(filePath, true))
+                    lock (FileLocking)
                     {
-                        writer.WriteLine(string.Join(",", _results.Values));
+                        using (var writer = new StreamWriter(filePath, false))
+                        {
+                            writer.WriteLine(string.Join("\n", SampleBox.Text));
+                        }
                     }
 
                     // Delay for a short period of time to prevent UI from freezing

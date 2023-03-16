@@ -81,7 +81,7 @@ namespace StatisticalApp
                     {
                         using (var writer = new StreamWriter(filePath, false))
                         {
-                            writer.WriteLine($"Results from {i} measurement from {SampleCount} samples:\n");
+                            writer.WriteLine($"Results from {i + 1} measurement from {SampleCount} samples:\n");
                             writer.WriteLine(string.Join("\n", SampleBox.Text));
                         }
                     }

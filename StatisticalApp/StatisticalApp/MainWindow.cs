@@ -33,7 +33,7 @@ namespace StatisticalApp
             StatBox.Clear();
 
             // read sample size from config file (here we use a constant instead)
-            const int sampleSize = 10000;
+            const int sampleSize = 10;
 
             // create distribution
             var normal = Normal.WithMeanStdDev(0, 1);
@@ -84,7 +84,7 @@ namespace StatisticalApp
                     }
 
                     // wait 2 seconds
-                    await Task.Delay(200, _cancellationTokenSource.Token);
+                    await Task.Delay(50, _cancellationTokenSource.Token);
                 }
             }
             catch (OperationCanceledException)

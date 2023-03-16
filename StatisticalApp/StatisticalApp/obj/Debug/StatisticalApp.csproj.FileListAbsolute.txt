@@ -15,3 +15,5 @@ C:\projects\KLNSPG_Parallel\StatisticalApp\StatisticalApp\obj\Debug\StatisticalA
 C:\projects\KLNSPG_Parallel\StatisticalApp\StatisticalApp\obj\Debug\StatisticalApp.csproj.CopyComplete
 C:\projects\KLNSPG_Parallel\StatisticalApp\StatisticalApp\obj\Debug\StatisticalApp.exe
 C:\projects\KLNSPG_Parallel\StatisticalApp\StatisticalApp\obj\Debug\StatisticalApp.pdb
+C:\projects\KLNSPG_Parallel\StatisticalApp\StatisticalApp\bin\Debug\Newtonsoft.Json.dll
+C:\projects\KLNSPG_Parallel\StatisticalApp\StatisticalApp\bin\Debug\Newtonsoft.Json.xml

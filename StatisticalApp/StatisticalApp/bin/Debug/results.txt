@@ -1,8 +1,11 @@
-Skewness: 0,0350
-Kurtosis: -0,0750
-Variance: 1,0420
-Standard deviation: 1,0208
-Mean: -0,0468
-Median: -0,0586
-Minimum: -2,2872
-Maximum: 2,8367
+Results from 99 measurement from 100 samples:
+
+Skewness: -0,2414
+Kurtosis: 0,1886
+Variance: 1,0425
+Standard deviation: 1,0210
+Mean: 0,0887
+Median: 0,1670
+Minimum: -2,7497
+Maximum: 2,3859
+RMS: 1,0198

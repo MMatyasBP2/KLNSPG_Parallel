@@ -21,9 +21,9 @@ namespace StatisticalApp
     public partial class MainWindow : Form
     {
         private CancellationTokenSource _cancellationTokenSource;
-        private readonly IDictionary<string, string> _results = new Dictionary<string, string>();
+        private readonly IDictionary<string, string> Results = new Dictionary<string, string>();
         private static readonly object FileLocking = new object();
-        private int _sampleSize;
+        private int SampleCount;
 
         public MainWindow()
         {
@@ -34,7 +34,7 @@ namespace StatisticalApp
         {
             StatLabel.Visible = false;
             StatBox.Visible = false;
-            _results.Clear();
+            Results.Clear();
             SampleBox.Clear();
             StatBox.Clear();
 
@@ -42,15 +42,15 @@ namespace StatisticalApp
             {
                 string json = File.ReadAllText("appconfig.json");
                 dynamic jsonObj = JsonConvert.DeserializeObject(json);
-                _sampleSize = jsonObj.SampleCount;
+                SampleCount = jsonObj.SampleCount;
 
                 var normal = Normal.WithMeanStdDev(0, 1);
 
                 _cancellationTokenSource = new CancellationTokenSource();
 
-                for (int i = 0; i < _sampleSize; i++)
+                for (int i = 0; i < SampleCount; i++)
                 {
-                    var samples = Enumerable.Range(0, _sampleSize)
+                    var samples = Enumerable.Range(0, SampleCount)
                         .Select(_ => normal.Sample())
                         .ToList();
 
@@ -62,23 +62,26 @@ namespace StatisticalApp
                     var median = samples.Median();
                     var min = samples.Min();
                     var max = samples.Max();
+                    var rms = samples.RootMeanSquare();
 
-                    _results["Skewness"] = $"{skewness:F4}";
-                    _results["Kurtosis"] = $"{kurtosis:F4}";
-                    _results["Variance"] = $"{variance:F4}";
-                    _results["Standard deviation"] = $"{stdDev:F4}";
-                    _results["Mean"] = $"{mean:F4}";
-                    _results["Median"] = $"{median:F4}";
-                    _results["Minimum"] = $"{min:F4}";
-                    _results["Maximum"] = $"{max:F4}";
+                    Results["Skewness"] = $"{skewness:F4}";
+                    Results["Kurtosis"] = $"{kurtosis:F4}";
+                    Results["Variance"] = $"{variance:F4}";
+                    Results["Standard deviation"] = $"{stdDev:F4}";
+                    Results["Mean"] = $"{mean:F4}";
+                    Results["Median"] = $"{median:F4}";
+                    Results["Minimum"] = $"{min:F4}";
+                    Results["Maximum"] = $"{max:F4}";
+                    Results["RMS"] = $"{rms:F4}";
 
-                    SampleBox.Text = string.Join(Environment.NewLine, _results.Select(kv => $"{kv.Key}: {kv.Value}"));
+                    SampleBox.Text = string.Join(Environment.NewLine, Results.Select(kv => $"{kv.Key}: {kv.Value}"));
 
                     var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "results.txt");
                     lock (FileLocking)
                     {
                         using (var writer = new StreamWriter(filePath, false))
                         {
+                            writer.WriteLine($"Results from {i} measurement from {SampleCount} samples:\n");
                             writer.WriteLine(string.Join("\n", SampleBox.Text));
                         }
                     }
@@ -97,7 +100,7 @@ namespace StatisticalApp
 
             StatLabel.Visible = true;
             StatBox.Visible = true;
-            StatBox.Text = string.Join(Environment.NewLine, _results.Select(kv => $"{kv.Key}: {kv.Value}"));
+            StatBox.Text = string.Join(Environment.NewLine, Results.Select(kv => $"{kv.Key}: {kv.Value}"));
         }
 
         private void StopButton_Click(object sender, EventArgs e)

@@ -48,7 +48,7 @@
             // 
             // StartButton
             // 
-            this.StartButton.Location = new System.Drawing.Point(84, 113);
+            this.StartButton.Location = new System.Drawing.Point(33, 129);
             this.StartButton.Name = "StartButton";
             this.StartButton.Size = new System.Drawing.Size(108, 47);
             this.StartButton.TabIndex = 1;
@@ -58,15 +58,17 @@
             // 
             // SampleBox
             // 
-            this.SampleBox.Location = new System.Drawing.Point(84, 189);
+            this.SampleBox.Enabled = false;
+            this.SampleBox.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.SampleBox.Location = new System.Drawing.Point(33, 189);
             this.SampleBox.Name = "SampleBox";
-            this.SampleBox.Size = new System.Drawing.Size(342, 388);
+            this.SampleBox.Size = new System.Drawing.Size(249, 183);
             this.SampleBox.TabIndex = 2;
             this.SampleBox.Text = "";
             // 
             // StopButton
             // 
-            this.StopButton.Location = new System.Drawing.Point(250, 113);
+            this.StopButton.Location = new System.Drawing.Point(215, 129);
             this.StopButton.Name = "StopButton";
             this.StopButton.Size = new System.Drawing.Size(67, 47);
             this.StopButton.TabIndex = 5;
@@ -76,9 +78,10 @@
             // 
             // StatBox
             // 
-            this.StatBox.Location = new System.Drawing.Point(557, 189);
+            this.StatBox.Enabled = false;
+            this.StatBox.Location = new System.Drawing.Point(298, 189);
             this.StatBox.Name = "StatBox";
-            this.StatBox.Size = new System.Drawing.Size(304, 236);
+            this.StatBox.Size = new System.Drawing.Size(237, 183);
             this.StatBox.TabIndex = 6;
             this.StatBox.Text = "";
             this.StatBox.Visible = false;
@@ -87,7 +90,7 @@
             // 
             this.StatLabel.AutoSize = true;
             this.StatLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.StatLabel.Location = new System.Drawing.Point(552, 131);
+            this.StatLabel.Location = new System.Drawing.Point(302, 147);
             this.StatLabel.Name = "StatLabel";
             this.StatLabel.Size = new System.Drawing.Size(93, 29);
             this.StatLabel.TabIndex = 7;
@@ -116,10 +119,10 @@
 
         private System.Windows.Forms.Label MainTitle;
         private System.Windows.Forms.Button StartButton;
-        private System.Windows.Forms.RichTextBox SampleBox;
         private System.Windows.Forms.Button StopButton;
         private System.Windows.Forms.RichTextBox StatBox;
         private System.Windows.Forms.Label StatLabel;
+        private System.Windows.Forms.RichTextBox SampleBox;
     }
 }
 

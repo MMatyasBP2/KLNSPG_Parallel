@@ -49,14 +49,8 @@ namespace StatisticalApp
                 // setup cancellation token
                 _cancellationTokenSource = new CancellationTokenSource();
 
-                while (true)
+                for (int i = 0; i < _sampleSize; i++)
                 {
-                    // check for cancellation
-                    if (_results.Count >= _sampleSize)
-                    {
-                        break;
-                    }
-
                     // simulate samples
                     var samples = Enumerable.Range(0, _sampleSize)
                         .Select(_ => normal.Sample())
@@ -91,7 +85,14 @@ namespace StatisticalApp
                         writer.WriteLine(string.Join(",", _results.Values));
                     }
 
-                    await Task.Delay(50, _cancellationTokenSource.Token);
+                    // Delay for a short period of time to prevent UI from freezing
+                    await Task.Delay(50);
+
+                    // check for cancellation
+                    if (_cancellationTokenSource.Token.IsCancellationRequested)
+                    {
+                        break;
+                    }
                 }
             }
             catch (OperationCanceledException)

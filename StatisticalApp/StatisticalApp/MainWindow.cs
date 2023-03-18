@@ -23,78 +23,13 @@ namespace StatisticalApp
         private CancellationTokenSource _cancellationTokenSource;
         private CancellationTokenSource _plotCancellationTokenSource;
         private readonly IDictionary<string, string> Results = new Dictionary<string, string>();
+        private readonly Chart Chart = new Chart();
         private static readonly object FileLocking = new object();
         private int SampleCount;
-        private Chart chart = new Chart();
 
         public MainWindow()
         {
             InitializeComponent();
-        }
-
-        private void PlotButton_Click(object sender, EventArgs e)
-        {
-            if (_cancellationTokenSource == null || _cancellationTokenSource.IsCancellationRequested)
-            {
-                MessageBox.Show("Please start sampling before plotting the normal distribution!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            if (_plotCancellationTokenSource != null && !_plotCancellationTokenSource.IsCancellationRequested)
-            {
-                _plotCancellationTokenSource.Cancel();
-            }
-
-            _plotCancellationTokenSource = new CancellationTokenSource();
-
-            chart.ChartAreas.Add(new ChartArea());
-            chart.Series.Add(new System.Windows.Forms.DataVisualization.Charting.Series());
-            chart.Series[0].ChartType = SeriesChartType.Column;
-
-            var form = new Form();
-            form.Width = 320;
-            form.Height = 350;
-            form.ShowIcon = false;
-            form.Controls.Add(chart);
-
-            Task.Run(() =>
-            {
-                while (!_plotCancellationTokenSource.Token.IsCancellationRequested)
-                {
-                    var normal = Normal.WithMeanStdDev(0, 1);
-
-                    var samples = Enumerable.Range(0, SampleCount)
-                        .Select(_ => normal.Sample())
-                        .ToList();
-
-                    var histogram = new Histogram(samples, 10);
-
-                    try
-                    {
-                        chart.Invoke(new Action(() =>
-                        {
-                            chart.Series[0].Points.Clear();
-
-                            for (int i = 0; i < histogram.BucketCount; i++)
-                            {
-                                chart.Series[0].Points.AddXY(histogram[i].LowerBound, histogram[i].Count);
-                            }
-
-                            chart.Invalidate();
-                        }));
-                    }
-                    catch (InvalidOperationException)
-                    {
-                        MessageBox.Show("Please restart sampling!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-
-                    Thread.Sleep(50);
-                }
-            }, _plotCancellationTokenSource.Token);
-
-            form.FormClosing += (s, ev) => _plotCancellationTokenSource.Cancel();
-
-            form.ShowDialog();
         }
 
         private async void StartButton_Click(object sender, EventArgs e)
@@ -107,14 +42,12 @@ namespace StatisticalApp
 
             try
             {
-                string json = File.ReadAllText("appconfig.json");
-                dynamic jsonObj = JsonConvert.DeserializeObject(json);
-                SampleCount = jsonObj.SampleCount;
+                JObject jConfig = JsonConvert.DeserializeObject<JObject>(File.ReadAllText("appconfig.json"));
+                SampleCount = Convert.ToInt32(jConfig["MeasurementSettings"]["SampleCount"]);
 
                 var normal = Normal.WithMeanStdDev(0, 1);
 
                 _cancellationTokenSource = new CancellationTokenSource();
-
 
                 var chart = new Chart();
                 var chartArea = new ChartArea();
@@ -194,6 +127,71 @@ namespace StatisticalApp
         private void StopButton_Click(object sender, EventArgs e)
         {
             _cancellationTokenSource.Cancel();
+        }
+
+        private void PlotButton_Click(object sender, EventArgs e)
+        {
+            if (_cancellationTokenSource == null || _cancellationTokenSource.IsCancellationRequested)
+            {
+                MessageBox.Show("Please start sampling before plotting the normal distribution!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (_plotCancellationTokenSource != null && !_plotCancellationTokenSource.IsCancellationRequested)
+            {
+                _plotCancellationTokenSource.Cancel();
+            }
+
+            _plotCancellationTokenSource = new CancellationTokenSource();
+
+            Chart.ChartAreas.Add(new ChartArea());
+            Chart.Series.Add(new System.Windows.Forms.DataVisualization.Charting.Series());
+            Chart.Series[0].ChartType = SeriesChartType.Column;
+
+            var form = new Form();
+            form.Width = 320;
+            form.Height = 350;
+            form.ShowIcon = false;
+            form.Controls.Add(Chart);
+
+            Task.Run(() =>
+            {
+                while (!_plotCancellationTokenSource.Token.IsCancellationRequested)
+                {
+                    var normal = Normal.WithMeanStdDev(0, 1);
+
+                    var samples = Enumerable.Range(0, SampleCount)
+                        .Select(_ => normal.Sample())
+                        .ToList();
+
+                    var histogram = new Histogram(samples, 10);
+
+                    try
+                    {
+                        Chart.Invoke(new Action(() =>
+                        {
+                            Chart.Series[0].Points.Clear();
+
+                            for (int i = 0; i < histogram.BucketCount; i++)
+                            {
+                                Chart.Series[0].Points.AddXY(histogram[i].LowerBound, histogram[i].Count);
+                            }
+
+                            Chart.Invalidate();
+                        }));
+                    }
+                    catch (InvalidOperationException)
+                    {
+                        MessageBox.Show("Please restart sampling!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+
+                    Thread.Sleep(50);
+                }
+            }, _plotCancellationTokenSource.Token);
+
+            form.FormClosing += (s, ev) => _plotCancellationTokenSource.Cancel();
+
+            form.ShowDialog();
         }
     }
 }

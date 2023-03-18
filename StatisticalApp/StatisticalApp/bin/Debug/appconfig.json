@@ -1,3 +1,5 @@
 {
-  "SampleCount": 10000
+  "MeasurementSettings": {
+    "SampleCount": 10000
+  }
 }

@@ -57,6 +57,7 @@ namespace StatisticalApp.Managing
                 double kurtosis = samples.Kurtosis();
                 double covariance = samples.Covariance(samples);
 
+                Results["Sample"] = $"{i}";
                 Results["Minimum"] = $"{min:F4}";
                 Results["Maximum"] = $"{max:F4}";
                 Results["Mean"] = $"{mean:F4}";

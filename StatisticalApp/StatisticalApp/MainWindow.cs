@@ -1,20 +1,8 @@
-﻿using MathNet.Numerics.Statistics;
-using MathNet.Numerics;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using MathNet.Numerics.Distributions;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json;
-using System.Windows.Forms.DataVisualization.Charting;
 using StatisticalApp.Managing;
 
 namespace StatisticalApp

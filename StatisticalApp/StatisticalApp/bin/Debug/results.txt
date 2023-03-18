@@ -1,11 +1,11 @@
-Results from 100 measurement from 100 samples:
+Results from 65 measurement from 100 samples:
 
-Skewness: -0,0113
-Kurtosis: 0,4401
-Variance: 0,8284
-Standard deviation: 0,9102
-Mean: -0,0404
-Median: -0,0086
-Minimum: -2,2922
-Maximum: 2,4383
-RMS: 0,9065
+Skewness: -0,0837
+Kurtosis: -0,2624
+Variance: 1,3427
+Standard deviation: 1,1587
+Mean: 0,0194
+Median: 0,0690
+Minimum: -2,6239
+Maximum: 3,0894
+RMS: 1,1531

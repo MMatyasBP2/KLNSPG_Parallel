@@ -52,8 +52,8 @@ namespace StatisticalApp
             chart.Series[0].ChartType = SeriesChartType.Column;
 
             var form = new Form();
-            form.Width = 600;
-            form.Height = 400;
+            form.Width = 320;
+            form.Height = 350;
             form.Controls.Add(chart);
 
             Task.Run(() =>

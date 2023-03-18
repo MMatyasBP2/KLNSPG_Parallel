@@ -56,7 +56,7 @@
             // 
             // StartButton
             // 
-            this.StartButton.Location = new System.Drawing.Point(33, 129);
+            this.StartButton.Location = new System.Drawing.Point(217, 155);
             this.StartButton.Name = "StartButton";
             this.StartButton.Size = new System.Drawing.Size(108, 47);
             this.StartButton.TabIndex = 1;
@@ -68,7 +68,7 @@
             // 
             this.SampleNameBox.Enabled = false;
             this.SampleNameBox.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.SampleNameBox.Location = new System.Drawing.Point(33, 189);
+            this.SampleNameBox.Location = new System.Drawing.Point(217, 215);
             this.SampleNameBox.Name = "SampleNameBox";
             this.SampleNameBox.Size = new System.Drawing.Size(94, 183);
             this.SampleNameBox.TabIndex = 2;
@@ -76,7 +76,7 @@
             // 
             // StopButton
             // 
-            this.StopButton.Location = new System.Drawing.Point(215, 129);
+            this.StopButton.Location = new System.Drawing.Point(399, 155);
             this.StopButton.Name = "StopButton";
             this.StopButton.Size = new System.Drawing.Size(67, 47);
             this.StopButton.TabIndex = 5;
@@ -87,7 +87,7 @@
             // StatNameBox
             // 
             this.StatNameBox.Enabled = false;
-            this.StatNameBox.Location = new System.Drawing.Point(447, 189);
+            this.StatNameBox.Location = new System.Drawing.Point(631, 215);
             this.StatNameBox.Name = "StatNameBox";
             this.StatNameBox.Size = new System.Drawing.Size(97, 183);
             this.StatNameBox.TabIndex = 6;
@@ -98,7 +98,7 @@
             // 
             this.StatLabel.AutoSize = true;
             this.StatLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.StatLabel.Location = new System.Drawing.Point(451, 147);
+            this.StatLabel.Location = new System.Drawing.Point(635, 173);
             this.StatLabel.Name = "StatLabel";
             this.StatLabel.Size = new System.Drawing.Size(93, 29);
             this.StatLabel.TabIndex = 7;
@@ -107,7 +107,7 @@
             // 
             // PlotButton
             // 
-            this.PlotButton.Location = new System.Drawing.Point(33, 400);
+            this.PlotButton.Location = new System.Drawing.Point(217, 426);
             this.PlotButton.Name = "PlotButton";
             this.PlotButton.Size = new System.Drawing.Size(58, 65);
             this.PlotButton.TabIndex = 8;
@@ -118,7 +118,7 @@
             // SampleValueBox
             // 
             this.SampleValueBox.Enabled = false;
-            this.SampleValueBox.Location = new System.Drawing.Point(133, 189);
+            this.SampleValueBox.Location = new System.Drawing.Point(317, 215);
             this.SampleValueBox.Name = "SampleValueBox";
             this.SampleValueBox.Size = new System.Drawing.Size(86, 183);
             this.SampleValueBox.TabIndex = 9;
@@ -127,7 +127,7 @@
             // StatValueBox
             // 
             this.StatValueBox.Enabled = false;
-            this.StatValueBox.Location = new System.Drawing.Point(550, 189);
+            this.StatValueBox.Location = new System.Drawing.Point(734, 215);
             this.StatValueBox.Name = "StatValueBox";
             this.StatValueBox.Size = new System.Drawing.Size(87, 183);
             this.StatValueBox.TabIndex = 10;

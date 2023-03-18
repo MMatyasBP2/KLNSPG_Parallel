@@ -45,26 +45,28 @@ namespace StatisticalApp.Managing
                     chart.Series[0].Points.AddXY(histogram[j].LowerBound, histogram[j].Count);
                 }
                 chart.Invalidate();
-
-                double skewness = samples.Skewness();
-                double kurtosis = samples.Kurtosis();
-                double variance = samples.Variance();
-                double stdDev = samples.StandardDeviation();
-                double mean = samples.Mean();
-                double median = samples.Median();
+                
                 double min = samples.Min();
                 double max = samples.Max();
+                double mean = samples.Mean();
+                double median = samples.Median();
+                double stdDev = samples.StandardDeviation();
+                double variance = samples.Variance();
                 double rms = samples.RootMeanSquare();
+                double skewness = samples.Skewness();
+                double kurtosis = samples.Kurtosis();
+                double covariance = samples.Covariance(samples);
 
-                Results["Skewness"] = $"{skewness:F4}";
-                Results["Kurtosis"] = $"{kurtosis:F4}";
-                Results["Variance"] = $"{variance:F4}";
-                Results["Standard deviation"] = $"{stdDev:F4}";
-                Results["Mean"] = $"{mean:F4}";
-                Results["Median"] = $"{median:F4}";
                 Results["Minimum"] = $"{min:F4}";
                 Results["Maximum"] = $"{max:F4}";
+                Results["Mean"] = $"{mean:F4}";
+                Results["Median"] = $"{median:F4}";
+                Results["STD"] = $"{stdDev:F4}";
+                Results["Variance"] = $"{variance:F4}";
                 Results["RMS"] = $"{rms:F4}";
+                Results["Skewness"] = $"{skewness:F4}";
+                Results["Kurtosis"] = $"{kurtosis:F4}";
+                Results["Covariance"] = $"{covariance:F4}";
 
                 SampleNameBox.Text = string.Join(Environment.NewLine, Results.Select(kv => $"{kv.Key}:"));
                 SampleValueBox.Text = string.Join(Environment.NewLine, Results.Select(kv => $"{kv.Value}"));

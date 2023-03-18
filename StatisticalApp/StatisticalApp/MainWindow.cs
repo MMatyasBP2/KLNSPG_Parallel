@@ -59,10 +59,7 @@ namespace StatisticalApp
             StatBox.Text = string.Join(Environment.NewLine, Results.Select(kv => $"{kv.Key}: {kv.Value}"));
         }
 
-        private void StopButton_Click(object sender, EventArgs e)
-        {
-            Statistics.CancelSampling();
-        }
+        private void StopButton_Click(object sender, EventArgs e) => Statistics.CancelSampling();
 
         private void PlotButton_Click(object sender, EventArgs e)
         {

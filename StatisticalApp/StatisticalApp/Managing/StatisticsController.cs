@@ -26,10 +26,7 @@ namespace StatisticalApp.Managing
             SampleCount = Convert.ToInt32(jConfig["MeasurementSettings"]["SampleCount"]);
         }
 
-        public List<double> AddSamplesToList()
-        {
-            return Enumerable.Range(0, SampleCount).Select(_ => normal.Sample()).ToList();
-        }
+        public List<double> AddSamplesToList() => Enumerable.Range(0, SampleCount).Select(_ => normal.Sample()).ToList();
 
         public async Task Sampling(Chart chart, object fileLocking, RichTextBox SampleBox, IDictionary<string, string> Results)
         {

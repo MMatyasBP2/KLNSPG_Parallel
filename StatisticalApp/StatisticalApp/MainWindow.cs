@@ -54,6 +54,7 @@ namespace StatisticalApp
             var form = new Form();
             form.Width = 320;
             form.Height = 350;
+            form.ShowIcon = false;
             form.Controls.Add(chart);
 
             Task.Run(() =>

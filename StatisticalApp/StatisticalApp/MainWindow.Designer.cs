@@ -34,6 +34,7 @@
             this.StopButton = new System.Windows.Forms.Button();
             this.StatBox = new System.Windows.Forms.RichTextBox();
             this.StatLabel = new System.Windows.Forms.Label();
+            this.PlotButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // MainTitle
@@ -97,11 +98,22 @@
             this.StatLabel.Text = "Results";
             this.StatLabel.Visible = false;
             // 
+            // PlotButton
+            // 
+            this.PlotButton.Location = new System.Drawing.Point(33, 400);
+            this.PlotButton.Name = "PlotButton";
+            this.PlotButton.Size = new System.Drawing.Size(58, 65);
+            this.PlotButton.TabIndex = 8;
+            this.PlotButton.Text = "Draw";
+            this.PlotButton.UseVisualStyleBackColor = true;
+            this.PlotButton.Click += new System.EventHandler(this.PlotButton_Click);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1068, 628);
+            this.Controls.Add(this.PlotButton);
             this.Controls.Add(this.StatLabel);
             this.Controls.Add(this.StatBox);
             this.Controls.Add(this.StopButton);
@@ -123,6 +135,7 @@
         private System.Windows.Forms.RichTextBox StatBox;
         private System.Windows.Forms.Label StatLabel;
         private System.Windows.Forms.RichTextBox SampleBox;
+        private System.Windows.Forms.Button PlotButton;
     }
 }
 

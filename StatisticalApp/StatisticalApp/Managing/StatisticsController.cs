@@ -20,6 +20,7 @@ namespace StatisticalApp.Managing
 
         public Normal normal = Normal.WithMeanStdDev(0, 1);
         public CancellationTokenSource cts;
+        private object FileLocker = new object();
         public StatisticsController()
         {
             JObject jConfig = JsonConvert.DeserializeObject<JObject>(File.ReadAllText("appconfig.json"));
@@ -28,7 +29,7 @@ namespace StatisticalApp.Managing
 
         public List<double> AddSamplesToList() => Enumerable.Range(0, SampleCount).Select(_ => normal.Sample()).ToList();
 
-        public async Task Sampling(Chart chart, object fileLocking, RichTextBox SampleBox, IDictionary<string, string> Results)
+        public async Task Sampling(Chart chart, RichTextBox SampleBox, IDictionary<string, string> Results)
         {
             cts = new CancellationTokenSource();
 
@@ -68,7 +69,7 @@ namespace StatisticalApp.Managing
                 SampleBox.Text = string.Join(Environment.NewLine, Results.Select(kv => $"{kv.Key}: {kv.Value}"));
 
                 var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "results.txt");
-                lock (fileLocking)
+                lock (FileLocker)
                 {
                     using (var writer = new StreamWriter(filePath, false))
                     {

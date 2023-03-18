@@ -14,39 +14,40 @@ namespace StatisticalApp.Managing
     public class ChartController
     {
         private CancellationTokenSource cts;
+        private Chart Chart;
 
         public Chart SetupChartSettings()
         {
-            var chart = new Chart();
+            Chart = new Chart();
             var chartArea = new ChartArea();
             chartArea.AxisX.Title = "Sample Value";
             chartArea.AxisY.Title = "Relative Frequency";
-            chart.ChartAreas.Add(chartArea);
+            Chart.ChartAreas.Add(chartArea);
 
             var series = new System.Windows.Forms.DataVisualization.Charting.Series();
             series.ChartType = SeriesChartType.Line;
             series.BorderWidth = 3;
-            chart.Series.Add(series);
+            Chart.Series.Add(series);
 
-            return chart;
+            return Chart;
         }
 
-        public void Charting(int SampleCount, Chart chart)
+        public void Charting(int SampleCount)
         {
             if (cts != null && !cts.IsCancellationRequested)
                 cts.Cancel();
 
             cts = new CancellationTokenSource();
 
-            chart.ChartAreas.Add(new ChartArea());
-            chart.Series.Add(new System.Windows.Forms.DataVisualization.Charting.Series());
-            chart.Series[0].ChartType = SeriesChartType.Column;
+            Chart.ChartAreas.Add(new ChartArea());
+            Chart.Series.Add(new System.Windows.Forms.DataVisualization.Charting.Series());
+            Chart.Series[0].ChartType = SeriesChartType.Column;
 
             var form = new Form();
             form.Width = 320;
             form.Height = 350;
             form.ShowIcon = false;
-            form.Controls.Add(chart);
+            form.Controls.Add(Chart);
 
             Task.Run(() =>
             {
@@ -62,16 +63,16 @@ namespace StatisticalApp.Managing
 
                     try
                     {
-                        chart.Invoke(new Action(() =>
+                        Chart.Invoke(new Action(() =>
                         {
-                            chart.Series[0].Points.Clear();
+                            Chart.Series[0].Points.Clear();
 
                             for (int i = 0; i < histogram.BucketCount; i++)
                             {
-                                chart.Series[0].Points.AddXY(histogram[i].LowerBound, histogram[i].Count);
+                                Chart.Series[0].Points.AddXY(histogram[i].LowerBound, histogram[i].Count);
                             }
 
-                            chart.Invalidate();
+                            Chart.Invalidate();
                         }));
                     }
                     catch (InvalidOperationException)

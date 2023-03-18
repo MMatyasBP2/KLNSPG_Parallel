@@ -22,8 +22,6 @@ namespace StatisticalApp
     public partial class MainWindow : Form
     {
         private readonly IDictionary<string, string> Results;
-        private readonly Chart Chart;
-        private readonly object FileLocking;
         private readonly StatisticsController Statistics;
         private readonly ChartController Charts;
 
@@ -33,8 +31,6 @@ namespace StatisticalApp
             Statistics = new StatisticsController();
             Charts = new ChartController();
             Results = new Dictionary<string, string>();
-            Chart = new Chart();
-            FileLocking = new object();
         }
 
         private async void StartButton_Click(object sender, EventArgs e)
@@ -48,7 +44,7 @@ namespace StatisticalApp
             try
             {
                 var chart = Charts.SetupChartSettings();
-                await Statistics.Sampling(chart, FileLocking, SampleBox, Results);
+                await Statistics.Sampling(chart, SampleBox, Results);
             }
             catch (OperationCanceledException)
             {
@@ -69,7 +65,7 @@ namespace StatisticalApp
                 return;
             }
 
-            Charts.Charting(Statistics.SampleCount, Chart);
+            Charts.Charting(Statistics.SampleCount);
         }
     }
 }

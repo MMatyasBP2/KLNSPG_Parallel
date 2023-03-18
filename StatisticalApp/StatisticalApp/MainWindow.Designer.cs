@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.MainTitle = new System.Windows.Forms.Label();
             this.StartButton = new System.Windows.Forms.Button();
             this.SampleBox = new System.Windows.Forms.RichTextBox();
@@ -120,8 +121,9 @@
             this.Controls.Add(this.SampleBox);
             this.Controls.Add(this.StartButton);
             this.Controls.Add(this.MainTitle);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainWindow";
-            this.Text = "MainWindow";
+            this.Text = "StatisticalApplication";
             this.ResumeLayout(false);
             this.PerformLayout();
 

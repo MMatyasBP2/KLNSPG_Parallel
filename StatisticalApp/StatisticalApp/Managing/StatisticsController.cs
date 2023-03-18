@@ -17,6 +17,17 @@ namespace StatisticalApp.Managing
     public class StatisticsController
     {
         public int SampleCount { get; set; }
+        public double Min { get; set; }
+        public double Max { get; set; }
+        public double Mean { get; set; }
+        public double Median { get; set; }
+        public double STD { get; set; }
+        public double Variance { get; set; }
+        public double RMS { get; set; }
+        public double Skewness { get; set; }
+        public double Kurtosis { get; set; }
+
+        public double Covariance { get; set; }
 
         public Normal normal = Normal.WithMeanStdDev(0, 1);
         public CancellationTokenSource cts;
@@ -27,7 +38,23 @@ namespace StatisticalApp.Managing
             SampleCount = Convert.ToInt32(jConfig["MeasurementSettings"]["SampleCount"]);
         }
 
+        #region Sampling
         public List<double> AddSamplesToList() => Enumerable.Range(0, SampleCount).Select(_ => normal.Sample()).ToList();
+
+        private void FillResultDictionary(int iterate, IDictionary<string, string> Results)
+        {
+            Results["Sample"] = $"{iterate}";
+            Results["Minimum"] = $"{Min:F4}";
+            Results["Maximum"] = $"{Max:F4}";
+            Results["Mean"] = $"{Mean:F4}";
+            Results["Median"] = $"{Median:F4}";
+            Results["STD"] = $"{STD:F4}";
+            Results["Variance"] = $"{Variance:F4}";
+            Results["RMS"] = $"{RMS:F4}";
+            Results["Skewness"] = $"{Skewness:F4}";
+            Results["Kurtosis"] = $"{Kurtosis:F4}";
+            Results["Covariance"] = $"{Covariance:F4}";
+        }
 
         public async Task Sampling(Chart chart, RichTextBox SampleNameBox, RichTextBox SampleValueBox, IDictionary<string, string> Results)
         {
@@ -46,28 +73,18 @@ namespace StatisticalApp.Managing
                 }
                 chart.Invalidate();
                 
-                double min = samples.Min();
-                double max = samples.Max();
-                double mean = samples.Mean();
-                double median = samples.Median();
-                double stdDev = samples.StandardDeviation();
-                double variance = samples.Variance();
-                double rms = samples.RootMeanSquare();
-                double skewness = samples.Skewness();
-                double kurtosis = samples.Kurtosis();
-                double covariance = samples.Covariance(samples);
+                Min = CalcMin(samples);
+                Max = CalcMax(samples);
+                Mean = CalcMean(samples);
+                Median = CalcMedian(samples);
+                STD = CalcSTD(samples);
+                Variance = CalcVariance(samples);
+                RMS = CalcRMS(samples);
+                Skewness = CalcSkewness(samples);
+                Kurtosis = CalcKurtosis(samples);
+                Covariance = CalcCovariance(samples);
 
-                Results["Sample"] = $"{i}";
-                Results["Minimum"] = $"{min:F4}";
-                Results["Maximum"] = $"{max:F4}";
-                Results["Mean"] = $"{mean:F4}";
-                Results["Median"] = $"{median:F4}";
-                Results["STD"] = $"{stdDev:F4}";
-                Results["Variance"] = $"{variance:F4}";
-                Results["RMS"] = $"{rms:F4}";
-                Results["Skewness"] = $"{skewness:F4}";
-                Results["Kurtosis"] = $"{kurtosis:F4}";
-                Results["Covariance"] = $"{covariance:F4}";
+                FillResultDictionary(i, Results);
 
                 SampleNameBox.Text = string.Join(Environment.NewLine, Results.Select(kv => $"{kv.Key}:"));
                 SampleValueBox.Text = string.Join(Environment.NewLine, Results.Select(kv => $"{kv.Value}"));
@@ -92,5 +109,59 @@ namespace StatisticalApp.Managing
         }
 
         public void CancelSampling() => cts.Cancel();
+        #endregion
+
+        #region Calculations
+        private double CalcMin(List<double> samples)
+        {
+            return samples.Min();
+        }
+
+        private double CalcMax(List<double> samples)
+        {
+            return samples.Min();
+        }
+
+        
+        private double CalcMean(List<double> samples)
+        {
+            return samples.Mean();
+        }
+
+        private double CalcMedian(List<double> samples)
+        {
+            return samples.Median();
+        }
+
+        private double CalcSTD(List<double> samples)
+        {
+            return samples.StandardDeviation();
+        }
+
+        private double CalcVariance(List<double> samples)
+        {
+            return samples.Variance();
+        }
+
+        private double CalcRMS(List<double> samples)
+        {
+            return samples.RootMeanSquare();
+        }
+
+        private double CalcSkewness(List<double> samples)
+        {
+            return samples.Skewness();
+        }
+
+        private double CalcKurtosis(List<double> samples)
+        {
+            return samples.Kurtosis();
+        }
+
+        private double CalcCovariance(List<double> samples)
+        {
+            return samples.Covariance(samples);
+        }
+        #endregion 
     }
 }

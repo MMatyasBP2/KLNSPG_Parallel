@@ -46,15 +46,15 @@ namespace StatisticalApp.Managing
                 }
                 chart.Invalidate();
 
-                var skewness = samples.Skewness();
-                var kurtosis = samples.Kurtosis();
-                var variance = samples.Variance();
-                var stdDev = samples.StandardDeviation();
-                var mean = samples.Mean();
-                var median = samples.Median();
-                var min = samples.Min();
-                var max = samples.Max();
-                var rms = samples.RootMeanSquare();
+                double skewness = samples.Skewness();
+                double kurtosis = samples.Kurtosis();
+                double variance = samples.Variance();
+                double stdDev = samples.StandardDeviation();
+                double mean = samples.Mean();
+                double median = samples.Median();
+                double min = samples.Min();
+                double max = samples.Max();
+                double rms = samples.RootMeanSquare();
 
                 Results["Skewness"] = $"{skewness:F4}";
                 Results["Kurtosis"] = $"{kurtosis:F4}";
@@ -75,8 +75,7 @@ namespace StatisticalApp.Managing
                     using (var writer = new StreamWriter(filePath, false))
                     {
                         writer.WriteLine($"Results from {i + 1} measurement from {SampleCount} samples:\n");
-                        writer.WriteLine(string.Join("\n", SampleNameBox.Text));
-                        writer.WriteLine(string.Join("\n", SampleValueBox.Text));
+                        writer.WriteLine(string.Join(Environment.NewLine, Results.Select(kv => $"{kv.Key}: {kv.Value}")));
                     }
                 }
 

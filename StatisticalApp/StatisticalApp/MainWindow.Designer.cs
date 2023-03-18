@@ -38,6 +38,10 @@
             this.PlotButton = new System.Windows.Forms.Button();
             this.SampleValueBox = new System.Windows.Forms.RichTextBox();
             this.StatValueBox = new System.Windows.Forms.RichTextBox();
+            this.RedLight = new System.Windows.Forms.PictureBox();
+            this.GreenLight = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.RedLight)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GreenLight)).BeginInit();
             this.SuspendLayout();
             // 
             // MainTitle
@@ -130,11 +134,33 @@
             this.StatValueBox.Text = "";
             this.StatValueBox.Visible = false;
             // 
+            // RedLight
+            // 
+            this.RedLight.Image = ((System.Drawing.Image)(resources.GetObject("RedLight.Image")));
+            this.RedLight.InitialImage = ((System.Drawing.Image)(resources.GetObject("RedLight.InitialImage")));
+            this.RedLight.Location = new System.Drawing.Point(952, 12);
+            this.RedLight.Name = "RedLight";
+            this.RedLight.Size = new System.Drawing.Size(104, 86);
+            this.RedLight.TabIndex = 11;
+            this.RedLight.TabStop = false;
+            // 
+            // GreenLight
+            // 
+            this.GreenLight.Image = ((System.Drawing.Image)(resources.GetObject("GreenLight.Image")));
+            this.GreenLight.Location = new System.Drawing.Point(952, 12);
+            this.GreenLight.Name = "GreenLight";
+            this.GreenLight.Size = new System.Drawing.Size(104, 86);
+            this.GreenLight.TabIndex = 12;
+            this.GreenLight.TabStop = false;
+            this.GreenLight.Visible = false;
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1068, 628);
+            this.Controls.Add(this.GreenLight);
+            this.Controls.Add(this.RedLight);
             this.Controls.Add(this.StatValueBox);
             this.Controls.Add(this.SampleValueBox);
             this.Controls.Add(this.PlotButton);
@@ -147,6 +173,8 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainWindow";
             this.Text = "StatisticalApplication";
+            ((System.ComponentModel.ISupportInitialize)(this.RedLight)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GreenLight)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -163,6 +191,8 @@
         private System.Windows.Forms.Button PlotButton;
         private System.Windows.Forms.RichTextBox SampleValueBox;
         private System.Windows.Forms.RichTextBox StatValueBox;
+        private System.Windows.Forms.PictureBox RedLight;
+        private System.Windows.Forms.PictureBox GreenLight;
     }
 }
 

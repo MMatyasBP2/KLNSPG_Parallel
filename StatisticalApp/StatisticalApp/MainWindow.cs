@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
+using System.Windows.Threading;
 using StatisticalApp.Managing;
 
 namespace StatisticalApp
@@ -15,7 +17,9 @@ namespace StatisticalApp
         private readonly StatisticsController Statistics;
         private readonly ChartController Charts;
         private Chart Chart;
-        private bool isRunnning;
+        private Thread lightingThread;
+        private volatile bool isRunning = false;
+        private WindowUpdate windowUpdate;
 
         public MainWindow()
         {
@@ -24,6 +28,7 @@ namespace StatisticalApp
             Charts = new ChartController();
             Results = new Dictionary<string, string>();
             Chart = new Chart();
+            windowUpdate = new WindowUpdate();
         }
 
         private async void StartButton_Click(object sender, EventArgs e)
@@ -40,11 +45,16 @@ namespace StatisticalApp
             {
                 Chart = Charts.SetupChartSettings();
 
-                isRunnning = true;
+                isRunning = true;
+
+                lightingThread = new Thread(Lighting);
+                lightingThread.IsBackground = true;
+                lightingThread.Start();
 
                 await Statistics.Sampling(Chart, SampleNameBox, SampleValueBox, Results);
 
-                isRunnning = false;
+                lightingThread.Abort();
+                GreenLight.Visible = false;
             }
             catch (OperationCanceledException)
             {
@@ -60,7 +70,7 @@ namespace StatisticalApp
 
         private void Lighting()
         {
-
+            windowUpdate.ModifyLedActivity(isRunning, GreenLight);
         }
 
         private void StopButton_Click(object sender, EventArgs e) => Statistics.CancelSampling();

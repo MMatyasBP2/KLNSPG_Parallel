@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 using StatisticalApp.Managing;
@@ -14,6 +15,7 @@ namespace StatisticalApp
         private readonly StatisticsController Statistics;
         private readonly ChartController Charts;
         private Chart Chart;
+        private bool isRunnning;
 
         public MainWindow()
         {
@@ -27,23 +29,38 @@ namespace StatisticalApp
         private async void StartButton_Click(object sender, EventArgs e)
         {
             StatLabel.Visible = false;
-            StatBox.Visible = false;
+            StatNameBox.Visible = false;
+            StatValueBox.Visible = false;
+
             Results.Clear();
-            SampleBox.Clear();
-            StatBox.Clear();
+            SampleNameBox.Clear();
+            StatNameBox.Clear();
 
             try
             {
                 Chart = Charts.SetupChartSettings();
-                await Statistics.Sampling(Chart, SampleBox, Results);
+
+                isRunnning = true;
+
+                await Statistics.Sampling(Chart, SampleNameBox, SampleValueBox, Results);
+
+                isRunnning = false;
             }
             catch (OperationCanceledException)
             {
             }
 
             StatLabel.Visible = true;
-            StatBox.Visible = true;
-            StatBox.Text = string.Join(Environment.NewLine, Results.Select(kv => $"{kv.Key}: {kv.Value}"));
+            StatNameBox.Visible = true;
+            StatValueBox.Visible = true;
+
+            StatNameBox.Text = string.Join(Environment.NewLine, Results.Select(kv => $"{kv.Key}:"));
+            StatValueBox.Text = string.Join(Environment.NewLine, Results.Select(kv => $"{kv.Value}"));
+        }
+
+        private void Lighting()
+        {
+
         }
 
         private void StopButton_Click(object sender, EventArgs e) => Statistics.CancelSampling();

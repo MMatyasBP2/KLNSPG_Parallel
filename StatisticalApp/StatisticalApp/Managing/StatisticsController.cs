@@ -29,7 +29,7 @@ namespace StatisticalApp.Managing
 
         public List<double> AddSamplesToList() => Enumerable.Range(0, SampleCount).Select(_ => normal.Sample()).ToList();
 
-        public async Task Sampling(Chart chart, RichTextBox SampleBox, IDictionary<string, string> Results)
+        public async Task Sampling(Chart chart, RichTextBox SampleNameBox, RichTextBox SampleValueBox, IDictionary<string, string> Results)
         {
             cts = new CancellationTokenSource();
 
@@ -66,7 +66,8 @@ namespace StatisticalApp.Managing
                 Results["Maximum"] = $"{max:F4}";
                 Results["RMS"] = $"{rms:F4}";
 
-                SampleBox.Text = string.Join(Environment.NewLine, Results.Select(kv => $"{kv.Key}: {kv.Value}"));
+                SampleNameBox.Text = string.Join(Environment.NewLine, Results.Select(kv => $"{kv.Key}:"));
+                SampleValueBox.Text = string.Join(Environment.NewLine, Results.Select(kv => $"{kv.Value}"));
 
                 var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "results.txt");
                 lock (FileLocker)
@@ -74,7 +75,8 @@ namespace StatisticalApp.Managing
                     using (var writer = new StreamWriter(filePath, false))
                     {
                         writer.WriteLine($"Results from {i + 1} measurement from {SampleCount} samples:\n");
-                        writer.WriteLine(string.Join("\n", SampleBox.Text));
+                        writer.WriteLine(string.Join("\n", SampleNameBox.Text));
+                        writer.WriteLine(string.Join("\n", SampleValueBox.Text));
                     }
                 }
 
@@ -87,6 +89,6 @@ namespace StatisticalApp.Managing
             }
         }
 
-        public void CancelSampling() { cts.Cancel(); }
+        public void CancelSampling() => cts.Cancel();
     }
 }

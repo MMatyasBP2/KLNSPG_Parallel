@@ -31,11 +31,13 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.MainTitle = new System.Windows.Forms.Label();
             this.StartButton = new System.Windows.Forms.Button();
-            this.SampleBox = new System.Windows.Forms.RichTextBox();
+            this.SampleNameBox = new System.Windows.Forms.RichTextBox();
             this.StopButton = new System.Windows.Forms.Button();
-            this.StatBox = new System.Windows.Forms.RichTextBox();
+            this.StatNameBox = new System.Windows.Forms.RichTextBox();
             this.StatLabel = new System.Windows.Forms.Label();
             this.PlotButton = new System.Windows.Forms.Button();
+            this.SampleValueBox = new System.Windows.Forms.RichTextBox();
+            this.StatValueBox = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // MainTitle
@@ -58,15 +60,15 @@
             this.StartButton.UseVisualStyleBackColor = true;
             this.StartButton.Click += new System.EventHandler(this.StartButton_Click);
             // 
-            // SampleBox
+            // SampleNameBox
             // 
-            this.SampleBox.Enabled = false;
-            this.SampleBox.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.SampleBox.Location = new System.Drawing.Point(33, 189);
-            this.SampleBox.Name = "SampleBox";
-            this.SampleBox.Size = new System.Drawing.Size(249, 183);
-            this.SampleBox.TabIndex = 2;
-            this.SampleBox.Text = "";
+            this.SampleNameBox.Enabled = false;
+            this.SampleNameBox.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.SampleNameBox.Location = new System.Drawing.Point(33, 189);
+            this.SampleNameBox.Name = "SampleNameBox";
+            this.SampleNameBox.Size = new System.Drawing.Size(94, 183);
+            this.SampleNameBox.TabIndex = 2;
+            this.SampleNameBox.Text = "";
             // 
             // StopButton
             // 
@@ -78,21 +80,21 @@
             this.StopButton.UseVisualStyleBackColor = true;
             this.StopButton.Click += new System.EventHandler(this.StopButton_Click);
             // 
-            // StatBox
+            // StatNameBox
             // 
-            this.StatBox.Enabled = false;
-            this.StatBox.Location = new System.Drawing.Point(298, 189);
-            this.StatBox.Name = "StatBox";
-            this.StatBox.Size = new System.Drawing.Size(237, 183);
-            this.StatBox.TabIndex = 6;
-            this.StatBox.Text = "";
-            this.StatBox.Visible = false;
+            this.StatNameBox.Enabled = false;
+            this.StatNameBox.Location = new System.Drawing.Point(447, 189);
+            this.StatNameBox.Name = "StatNameBox";
+            this.StatNameBox.Size = new System.Drawing.Size(97, 183);
+            this.StatNameBox.TabIndex = 6;
+            this.StatNameBox.Text = "";
+            this.StatNameBox.Visible = false;
             // 
             // StatLabel
             // 
             this.StatLabel.AutoSize = true;
             this.StatLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.StatLabel.Location = new System.Drawing.Point(302, 147);
+            this.StatLabel.Location = new System.Drawing.Point(451, 147);
             this.StatLabel.Name = "StatLabel";
             this.StatLabel.Size = new System.Drawing.Size(93, 29);
             this.StatLabel.TabIndex = 7;
@@ -109,16 +111,37 @@
             this.PlotButton.UseVisualStyleBackColor = true;
             this.PlotButton.Click += new System.EventHandler(this.PlotButton_Click);
             // 
+            // SampleValueBox
+            // 
+            this.SampleValueBox.Enabled = false;
+            this.SampleValueBox.Location = new System.Drawing.Point(133, 189);
+            this.SampleValueBox.Name = "SampleValueBox";
+            this.SampleValueBox.Size = new System.Drawing.Size(86, 183);
+            this.SampleValueBox.TabIndex = 9;
+            this.SampleValueBox.Text = "";
+            // 
+            // StatValueBox
+            // 
+            this.StatValueBox.Enabled = false;
+            this.StatValueBox.Location = new System.Drawing.Point(550, 189);
+            this.StatValueBox.Name = "StatValueBox";
+            this.StatValueBox.Size = new System.Drawing.Size(87, 183);
+            this.StatValueBox.TabIndex = 10;
+            this.StatValueBox.Text = "";
+            this.StatValueBox.Visible = false;
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1068, 628);
+            this.Controls.Add(this.StatValueBox);
+            this.Controls.Add(this.SampleValueBox);
             this.Controls.Add(this.PlotButton);
             this.Controls.Add(this.StatLabel);
-            this.Controls.Add(this.StatBox);
+            this.Controls.Add(this.StatNameBox);
             this.Controls.Add(this.StopButton);
-            this.Controls.Add(this.SampleBox);
+            this.Controls.Add(this.SampleNameBox);
             this.Controls.Add(this.StartButton);
             this.Controls.Add(this.MainTitle);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -134,10 +157,12 @@
         private System.Windows.Forms.Label MainTitle;
         private System.Windows.Forms.Button StartButton;
         private System.Windows.Forms.Button StopButton;
-        private System.Windows.Forms.RichTextBox StatBox;
+        private System.Windows.Forms.RichTextBox StatNameBox;
         private System.Windows.Forms.Label StatLabel;
-        private System.Windows.Forms.RichTextBox SampleBox;
+        private System.Windows.Forms.RichTextBox SampleNameBox;
         private System.Windows.Forms.Button PlotButton;
+        private System.Windows.Forms.RichTextBox SampleValueBox;
+        private System.Windows.Forms.RichTextBox StatValueBox;
     }
 }
 

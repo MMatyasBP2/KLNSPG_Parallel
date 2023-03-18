@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 using StatisticalApp.Managing;
 
 namespace StatisticalApp
@@ -12,6 +13,7 @@ namespace StatisticalApp
         private readonly IDictionary<string, string> Results;
         private readonly StatisticsController Statistics;
         private readonly ChartController Charts;
+        private Chart Chart;
 
         public MainWindow()
         {
@@ -19,6 +21,7 @@ namespace StatisticalApp
             Statistics = new StatisticsController();
             Charts = new ChartController();
             Results = new Dictionary<string, string>();
+            Chart = new Chart();
         }
 
         private async void StartButton_Click(object sender, EventArgs e)
@@ -31,8 +34,8 @@ namespace StatisticalApp
 
             try
             {
-                var chart = Charts.SetupChartSettings();
-                await Statistics.Sampling(chart, SampleBox, Results);
+                Chart = Charts.SetupChartSettings();
+                await Statistics.Sampling(Chart, SampleBox, Results);
             }
             catch (OperationCanceledException)
             {
@@ -53,7 +56,7 @@ namespace StatisticalApp
                 return;
             }
 
-            Charts.Charting(Statistics.SampleCount);
+            Charts.Charting(Statistics.SampleCount, Chart);
         }
     }
 }

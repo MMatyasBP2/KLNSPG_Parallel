@@ -68,6 +68,7 @@ namespace StatisticalApp.Managing
                     catch (InvalidOperationException)
                     {
                         MessageBox.Show("Please restart sampling!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
                     }
 
                     Thread.Sleep(50);

@@ -18,7 +18,7 @@ namespace StatisticalApp
         private Chart Chart;
         private Thread lightingThread;
         private volatile bool isRunning;
-        private WindowUpdate windowUpdate;
+        private readonly WindowUpdate windowUpdate;
 
         public MainWindow()
         {

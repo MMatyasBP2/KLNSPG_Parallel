@@ -55,7 +55,10 @@ namespace StatisticalApp.Managing
             Results["Covariance"] = $"{Covariance:F4}";
         }
 
-        public async Task Sampling(Chart chart, RichTextBox SampleNameBox, RichTextBox SampleValueBox, IDictionary<string, string> Results)
+        public async Task Sampling(Chart chart, 
+                                   RichTextBox SampleNameBox, 
+                                   RichTextBox SampleValueBox, 
+                                   IDictionary<string, string> Results)
         {
             cts = new CancellationTokenSource();
 
@@ -101,9 +104,7 @@ namespace StatisticalApp.Managing
                 await Task.Delay(50);
 
                 if (cts.Token.IsCancellationRequested)
-                {
                     break;
-                }
             }
         }
 

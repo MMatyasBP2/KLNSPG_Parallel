@@ -1,9 +1,5 @@
-﻿using MathNet.Numerics.Distributions;
-using MathNet.Numerics.Statistics;
+﻿using MathNet.Numerics.Statistics;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms.DataVisualization.Charting;

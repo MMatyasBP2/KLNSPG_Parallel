@@ -11,11 +11,12 @@ using System.Windows.Forms;
 
 namespace StatisticalApp.Managing
 {
-    public class ChartController
+    public static class ChartController
     {
-        private CancellationTokenSource cts;
+        private static CancellationTokenSource cts;
+        private static StatisticsController Stat = new StatisticsController();
 
-        public Chart SetupChartSettings()
+        public static Chart SetupChartSettings()
         {
             Chart Chart = new Chart();
             var chartArea = new ChartArea();
@@ -32,7 +33,7 @@ namespace StatisticalApp.Managing
             return Chart;
         }
 
-        public void Charting(int SampleCount, Chart chart)
+        public static void Charting(int SampleCount, Chart chart)
         {
             if (cts != null && !cts.IsCancellationRequested)
                 cts.Cancel();
@@ -40,22 +41,13 @@ namespace StatisticalApp.Managing
             cts = new CancellationTokenSource();
 
             chart.Series[0].ChartType = SeriesChartType.Column;
-
-            var form = new Form();
-            form.Width = 320;
-            form.Height = 350;
-            form.ShowIcon = false;
-            form.Controls.Add(chart);
+            var form = GenerateChartingForm(chart);
 
             Task.Run(() =>
             {
                 while (!cts.Token.IsCancellationRequested)
                 {
-                    var normal = Normal.WithMeanStdDev(0, 1);
-
-                    var samples = Enumerable.Range(0, SampleCount)
-                        .Select(_ => normal.Sample())
-                        .ToList();
+                    var samples = Stat.AddSamplesToList();
 
                     var histogram = new Histogram(samples, 10);
 
@@ -85,6 +77,16 @@ namespace StatisticalApp.Managing
             form.FormClosing += (s, ev) => cts.Cancel();
 
             form.ShowDialog();
+        }
+
+        private static Form GenerateChartingForm(Chart chart)
+        {
+            var form = new Form();
+            form.Width = 320;
+            form.Height = 350;
+            form.ShowIcon = false;
+            form.Controls.Add(chart);
+            return form;
         }
     }
 }

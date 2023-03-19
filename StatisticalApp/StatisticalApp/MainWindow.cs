@@ -15,19 +15,18 @@ namespace StatisticalApp
     {
         private readonly IDictionary<string, string> Results;
         private readonly StatisticsController Statistics;
-        private readonly ChartController Charts;
         private Chart Chart;
         private Thread lightingThread;
-        private volatile bool isRunning = false;
+        private volatile bool isRunning;
         private WindowUpdate windowUpdate;
 
         public MainWindow()
         {
             InitializeComponent();
             Statistics = new StatisticsController();
-            Charts = new ChartController();
             Results = new Dictionary<string, string>();
             Chart = new Chart();
+            isRunning = false;
             windowUpdate = new WindowUpdate();
         }
 
@@ -43,7 +42,7 @@ namespace StatisticalApp
 
             try
             {
-                Chart = Charts.SetupChartSettings();
+                Chart = ChartController.SetupChartSettings();
 
                 isRunning = true;
 
@@ -68,10 +67,7 @@ namespace StatisticalApp
             StatValueBox.Text = string.Join(Environment.NewLine, Results.Select(kv => $"{kv.Value}"));
         }
 
-        private void Lighting()
-        {
-            windowUpdate.ModifyLedActivity(isRunning, GreenLight);
-        }
+        private void Lighting() => windowUpdate.ModifyLedActivity(isRunning, GreenLight);
 
         private void StopButton_Click(object sender, EventArgs e) => Statistics.CancelSampling();
 
@@ -83,7 +79,7 @@ namespace StatisticalApp
                 return;
             }
 
-            Charts.Charting(Statistics.SampleCount, Chart);
+            ChartController.Charting(Statistics.SampleCount, Chart);
         }
     }
 }

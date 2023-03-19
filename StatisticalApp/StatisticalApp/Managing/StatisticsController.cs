@@ -26,10 +26,9 @@ namespace StatisticalApp.Managing
         public double RMS { get; set; }
         public double Skewness { get; set; }
         public double Kurtosis { get; set; }
-
         public double Covariance { get; set; }
 
-        public Normal normal = Normal.WithMeanStdDev(0, 1);
+        public Normal Normal = Normal.WithMeanStdDev(0, 1);
         public CancellationTokenSource cts;
         private object FileLocker = new object();
         public StatisticsController()
@@ -39,7 +38,7 @@ namespace StatisticalApp.Managing
         }
 
         #region Sampling
-        public List<double> AddSamplesToList() => Enumerable.Range(0, SampleCount).Select(_ => normal.Sample()).ToList();
+        public List<double> AddSamplesToList() => Enumerable.Range(0, SampleCount).Select(_ => Normal.Sample()).ToList();
 
         private void FillResultDictionary(int iterate, IDictionary<string, string> Results)
         {
@@ -84,7 +83,7 @@ namespace StatisticalApp.Managing
                 Kurtosis = CalcKurtosis(samples);
                 Covariance = CalcCovariance(samples);
 
-                FillResultDictionary(i, Results);
+                FillResultDictionary(i + 1, Results);
 
                 SampleNameBox.Text = string.Join(Environment.NewLine, Results.Select(kv => $"{kv.Key}:"));
                 SampleValueBox.Text = string.Join(Environment.NewLine, Results.Select(kv => $"{kv.Value}"));
@@ -112,56 +111,25 @@ namespace StatisticalApp.Managing
         #endregion
 
         #region Calculations
-        private double CalcMin(List<double> samples)
-        {
-            return samples.Min();
-        }
+        private double CalcMin(List<double> samples) => samples.Min();
 
-        private double CalcMax(List<double> samples)
-        {
-            return samples.Min();
-        }
+        private double CalcMax(List<double> samples) => samples.Min();
 
-        
-        private double CalcMean(List<double> samples)
-        {
-            return samples.Mean();
-        }
+        private double CalcMean(List<double> samples) => samples.Mean();
 
-        private double CalcMedian(List<double> samples)
-        {
-            return samples.Median();
-        }
+        private double CalcMedian(List<double> samples)=> samples.Median();
 
-        private double CalcSTD(List<double> samples)
-        {
-            return samples.StandardDeviation();
-        }
+        private double CalcSTD(List<double> samples) => samples.StandardDeviation();
 
-        private double CalcVariance(List<double> samples)
-        {
-            return samples.Variance();
-        }
+        private double CalcVariance(List<double> samples) => samples.Variance();
 
-        private double CalcRMS(List<double> samples)
-        {
-            return samples.RootMeanSquare();
-        }
+        private double CalcRMS(List<double> samples) => samples.RootMeanSquare();
 
-        private double CalcSkewness(List<double> samples)
-        {
-            return samples.Skewness();
-        }
+        private double CalcSkewness(List<double> samples) => samples.Skewness();
 
-        private double CalcKurtosis(List<double> samples)
-        {
-            return samples.Kurtosis();
-        }
+        private double CalcKurtosis(List<double> samples) => samples.Kurtosis();
 
-        private double CalcCovariance(List<double> samples)
-        {
-            return samples.Covariance(samples);
-        }
+        private double CalcCovariance(List<double> samples) => samples.Covariance(samples);
         #endregion 
     }
 }

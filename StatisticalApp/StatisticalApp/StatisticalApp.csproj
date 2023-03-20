@@ -65,7 +65,7 @@
     </Compile>
     <Compile Include="Managing\StatisticsController.cs" />
     <Compile Include="Managing\ChartController.cs" />
-    <Compile Include="Managing\WindowUpdate.cs" />
+    <Compile Include="Managing\LedUpdate.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="MainWindow.resx">

@@ -16,7 +16,7 @@ namespace StatisticalApp
         private Chart Chart;
         private Thread lightingThread;
         private volatile bool isRunning;
-        private readonly WindowUpdate windowUpdate;
+        private readonly LedUpdate LedUpdate;
 
         public MainWindow()
         {
@@ -25,7 +25,7 @@ namespace StatisticalApp
             Results = new Dictionary<string, string>();
             Chart = new Chart();
             isRunning = false;
-            windowUpdate = new WindowUpdate();
+            LedUpdate = new LedUpdate();
         }
 
         private async void StartButton_Click(object sender, EventArgs e)
@@ -65,7 +65,7 @@ namespace StatisticalApp
             StatValueBox.Text = string.Join(Environment.NewLine, Results.Select(kv => $"{kv.Value}"));
         }
 
-        private void Lighting() => windowUpdate.ModifyLedActivity(isRunning, GreenLight);
+        private void Lighting() => LedUpdate.ModifyLedActivity(isRunning, GreenLight);
 
         private void StopButton_Click(object sender, EventArgs e) => Statistics.CancelSampling();
 

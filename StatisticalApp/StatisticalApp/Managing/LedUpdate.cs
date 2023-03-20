@@ -4,7 +4,7 @@ using System.Windows.Threading;
 
 namespace StatisticalApp.Managing
 {
-    public class WindowUpdate : DispatcherObject
+    public class LedUpdate : DispatcherObject
     {
         public void ModifyLedActivity(bool isRunning, PictureBox GreenLight)
         {

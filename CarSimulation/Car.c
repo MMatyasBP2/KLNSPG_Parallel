@@ -7,7 +7,8 @@
 #define NUM_OF_CARS 10
 #define TRACK_LENGTH 100
 
-typedef struct {
+typedef struct
+{
     int id;
     int speed;
     int position;
@@ -17,7 +18,8 @@ Car cars[NUM_OF_CARS];
 pthread_mutex_t mutex;
 pthread_barrier_t barrier;
 
-void wait(double seconds) {
+void wait(double seconds)
+{
     time_t sec = (time_t) seconds;
     long nsec = (long) ((seconds - sec) * 1e9);
     struct timespec req = {sec, nsec};

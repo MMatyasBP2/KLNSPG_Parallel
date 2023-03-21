@@ -22,7 +22,8 @@ void wait(double seconds) {
     long nsec = (long) ((seconds - sec) * 1e9);
     struct timespec req = {sec, nsec};
     struct timespec rem = {0, 0};
-    while (nanosleep(&req, &rem) == -1) {
+    while (nanosleep(&req, &rem) == -1)
+    {
         req = rem;
     }
 }

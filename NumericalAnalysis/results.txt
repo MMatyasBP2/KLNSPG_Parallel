@@ -1,0 +1,3 @@
+Numerical Derivative with Newton Method: 0.958851
+Numerical Integral with Trapezoidal Method: 1.416147
+Numerical Integral with Simpson's Method: 1.416147

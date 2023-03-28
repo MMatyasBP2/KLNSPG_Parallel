@@ -1,3 +1,8 @@
-Numerical Derivative with Newton Method: 0.958851
-Numerical Integral with Trapezoidal Method: 1.416147
-Numerical Integral with Simpson's Method: 1.416147
+Numerical derivative (Newton method): 0.544501
+1st order derivative (Taylor polynom): 0.540293
+2nd order derivative (Taylor polynom): 0.841464
+Trapezoidal integration (mid-point rule): -1.#IND00
+Trapezoidal integration (left-end rule): -1.#INF00
+Trapezoidal integration (right-end rule): 1.#INF00
+Simpson integration (1/3 rule): 1.#INF00
+Simpson integration (3/8 rule): 1.#INF00

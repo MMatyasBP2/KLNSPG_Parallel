@@ -4,6 +4,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 using StatisticalApp.Managing;
@@ -51,7 +52,8 @@ namespace StatisticalApp
                 lightingThread.IsBackground = true;
                 lightingThread.Start();
 
-                await Statistics.Sampling(Chart, SampleNameBox, SampleValueBox, Results);
+                var samplingTask = Task.Run(() => Statistics.Sampling(Chart, SampleNameBox, SampleValueBox, Results));
+                await samplingTask;
 
                 lightingThread.Abort();
                 GreenLight.Visible = false;
@@ -60,13 +62,20 @@ namespace StatisticalApp
             {
             }
 
+            var stopwatch = Stopwatch.StartNew();
+
             StatLabel.Visible = true;
             StatNameBox.Visible = true;
             StatValueBox.Visible = true;
             ResultButton.Visible = true;
+            ParallelResultBox.Visible = true;
 
             StatNameBox.Text = string.Join(Environment.NewLine, Results.Select(kv => $"{kv.Key}:"));
             StatValueBox.Text = string.Join(Environment.NewLine, Results.Select(kv => $"{kv.Value}"));
+
+            stopwatch.Stop();
+
+            ParallelResultBox.Text = $"A művelet {stopwatch.ElapsedMilliseconds} ms alatt futott le.";
         }
 
         private void Lighting() => LedUpdate.ModifyLedActivity(isRunning, GreenLight);

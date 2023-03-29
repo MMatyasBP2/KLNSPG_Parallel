@@ -186,6 +186,7 @@
             this.ParallelResultBox.Size = new System.Drawing.Size(225, 183);
             this.ParallelResultBox.TabIndex = 15;
             this.ParallelResultBox.Text = "";
+            this.ParallelResultBox.Visible = false;
             // 
             // MainWindow
             // 

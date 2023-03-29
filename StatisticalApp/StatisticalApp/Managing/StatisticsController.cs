@@ -87,8 +87,8 @@ namespace StatisticalApp.Managing
 
                 FillResultDictionary(i + 1, Results);
 
-                SampleNameBox.Text = string.Join(Environment.NewLine, Results.Select(kv => $"{kv.Key}:"));
-                SampleValueBox.Text = string.Join(Environment.NewLine, Results.Select(kv => $"{kv.Value}"));
+                SampleNameBox.Invoke(new Action(() => SampleNameBox.Text = string.Join(Environment.NewLine, Results.Select(kv => $"{kv.Key}:"))));
+                SampleValueBox.Invoke(new Action(() => SampleValueBox.Text = string.Join(Environment.NewLine, Results.Select(kv => $"{kv.Value}"))));
 
                 var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "results.txt");
                 lock (FileLocker)

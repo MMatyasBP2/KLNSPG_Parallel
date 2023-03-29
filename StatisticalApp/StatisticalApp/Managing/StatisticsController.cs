@@ -29,7 +29,7 @@ namespace StatisticalApp.Managing
 
         public Normal Normal = Normal.WithMeanStdDev(0, 1);
         public CancellationTokenSource cts;
-        private object FileLocker = new object();
+        private readonly object FileLocker = new object();
         public StatisticsController()
         {
             JObject jConfig = JsonConvert.DeserializeObject<JObject>(File.ReadAllText("appconfig.json"));

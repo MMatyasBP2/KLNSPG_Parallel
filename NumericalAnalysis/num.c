@@ -77,12 +77,12 @@ double simpson_integration_1_3(double a, double b, int n)
 double simpson_integration_3_8(double a, double b, int n) {
     double h = (b - a) / n;
     double sum = f(a) + f(b);
-#pragma omp parallel for reduction(+:sum)
-    for (int i = 1; i < n; i++) {
-        double x = a + i * h;
-        sum += 3.0 * f(x + h / 3.0);
-        sum += 3.0 * f(x + 2.0 * h / 3.0);
-    }
+    #pragma omp parallel for reduction(+:sum)
+        for (int i = 1; i < n; i++) {
+            double x = a + i * h;
+            sum += 3.0 * f(x + h / 3.0);
+            sum += 3.0 * f(x + 2.0 * h / 3.0);
+        }
     return 3.0 * h / 8.0 * sum;
 }
 
@@ -116,6 +116,7 @@ void print_results(double a, double b, int n)
 void write_results(double a, double b, int n)
 {
     FILE* f = fopen("results.txt", "w");
+    fprintf(f, "Results with 'a' = %.2lf, 'b' = %.2lf, 'n' = %d:\n", a, b, n);
     fprintf(f, "Numerical derivative (Newton method): %f\n", newton_deriv(a, 0.01));
     fprintf(f, "1st order derivative (Taylor polynom): %f\n", taylor_1_deriv(a, 0.01));
     fprintf(f, "2nd order derivative (Taylor polynom): %f\n", taylor_2_deriv(a, 0.01));
@@ -135,7 +136,7 @@ void check_input(char* msg, double* a, double* b, int* n)
     {
         ok = true;
         puts(msg);
-        if (scanf("%lf, %lf, %lf", a, b, n) != 3)
+        if (scanf("%lf, %lf, %d", a, b, n) != 3)
         {
             printf("Wrong input! Please retry!\n");
             while ((getchar()) != '\n');

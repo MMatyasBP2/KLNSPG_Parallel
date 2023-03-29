@@ -6,7 +6,7 @@ void* thread_function(void* arg)
 {
     printf("Second thread started\n");
     
-    sleep(2);
+    sleep(8);
     
     printf("Second thread finished\n");
     
@@ -19,7 +19,7 @@ int main()
     
     printf("Main thread started\n");
     
-    sleep(1);
+    sleep(4);
     
     pthread_create(&thread, NULL, thread_function, NULL);
     pthread_join(thread, NULL);

@@ -10,7 +10,7 @@ namespace StatisticalApp.Managing
     public static class ChartController
     {
         private static CancellationTokenSource cts;
-        private static StatisticsController Stat = new StatisticsController();
+        private readonly static StatisticsController Stat = new StatisticsController();
 
         public static Chart SetupChartSettings()
         {

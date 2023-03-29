@@ -34,6 +34,7 @@ namespace StatisticalApp
             StatLabel.Visible = false;
             StatNameBox.Visible = false;
             StatValueBox.Visible = false;
+            ResultButton.Visible = false;
 
             Results.Clear();
             SampleNameBox.Clear();
@@ -61,6 +62,7 @@ namespace StatisticalApp
             StatLabel.Visible = true;
             StatNameBox.Visible = true;
             StatValueBox.Visible = true;
+            ResultButton.Visible = true;
 
             StatNameBox.Text = string.Join(Environment.NewLine, Results.Select(kv => $"{kv.Key}:"));
             StatValueBox.Text = string.Join(Environment.NewLine, Results.Select(kv => $"{kv.Value}"));
@@ -82,5 +84,7 @@ namespace StatisticalApp
         }
 
         private void ConfigButton_Click(object sender, EventArgs e) => Process.Start("appconfig.json");
+
+        private void ResultButton_Click(object sender, EventArgs e) => Process.Start("results.txt");
     }
 }

@@ -41,6 +41,7 @@
             this.RedLight = new System.Windows.Forms.PictureBox();
             this.GreenLight = new System.Windows.Forms.PictureBox();
             this.ConfigButton = new System.Windows.Forms.Button();
+            this.ResultButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.RedLight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GreenLight)).BeginInit();
             this.SuspendLayout();
@@ -165,11 +166,23 @@
             this.ConfigButton.UseVisualStyleBackColor = true;
             this.ConfigButton.Click += new System.EventHandler(this.ConfigButton_Click);
             // 
+            // ResultButton
+            // 
+            this.ResultButton.Location = new System.Drawing.Point(631, 426);
+            this.ResultButton.Name = "ResultButton";
+            this.ResultButton.Size = new System.Drawing.Size(97, 65);
+            this.ResultButton.TabIndex = 14;
+            this.ResultButton.Text = "Open results";
+            this.ResultButton.UseVisualStyleBackColor = true;
+            this.ResultButton.Visible = false;
+            this.ResultButton.Click += new System.EventHandler(this.ResultButton_Click);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1068, 628);
+            this.Controls.Add(this.ResultButton);
             this.Controls.Add(this.ConfigButton);
             this.Controls.Add(this.GreenLight);
             this.Controls.Add(this.RedLight);
@@ -206,6 +219,7 @@
         private System.Windows.Forms.PictureBox RedLight;
         private System.Windows.Forms.PictureBox GreenLight;
         private System.Windows.Forms.Button ConfigButton;
+        private System.Windows.Forms.Button ResultButton;
     }
 }
 

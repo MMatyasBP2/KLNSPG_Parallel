@@ -35,6 +35,7 @@ namespace StatisticalApp
             StatNameBox.Visible = false;
             StatValueBox.Visible = false;
             ResultButton.Visible = false;
+            ParallelResultBox.Visible = false;
 
             Results.Clear();
             SampleNameBox.Clear();

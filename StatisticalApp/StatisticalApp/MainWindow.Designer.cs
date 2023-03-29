@@ -42,6 +42,7 @@
             this.GreenLight = new System.Windows.Forms.PictureBox();
             this.ConfigButton = new System.Windows.Forms.Button();
             this.ResultButton = new System.Windows.Forms.Button();
+            this.ParallelResultBox = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.RedLight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GreenLight)).BeginInit();
             this.SuspendLayout();
@@ -58,7 +59,7 @@
             // 
             // StartButton
             // 
-            this.StartButton.Location = new System.Drawing.Point(217, 155);
+            this.StartButton.Location = new System.Drawing.Point(99, 157);
             this.StartButton.Name = "StartButton";
             this.StartButton.Size = new System.Drawing.Size(108, 47);
             this.StartButton.TabIndex = 1;
@@ -70,7 +71,7 @@
             // 
             this.SampleNameBox.Enabled = false;
             this.SampleNameBox.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.SampleNameBox.Location = new System.Drawing.Point(217, 215);
+            this.SampleNameBox.Location = new System.Drawing.Point(99, 217);
             this.SampleNameBox.Name = "SampleNameBox";
             this.SampleNameBox.Size = new System.Drawing.Size(94, 183);
             this.SampleNameBox.TabIndex = 2;
@@ -78,7 +79,7 @@
             // 
             // StopButton
             // 
-            this.StopButton.Location = new System.Drawing.Point(399, 155);
+            this.StopButton.Location = new System.Drawing.Point(281, 157);
             this.StopButton.Name = "StopButton";
             this.StopButton.Size = new System.Drawing.Size(67, 47);
             this.StopButton.TabIndex = 5;
@@ -89,7 +90,7 @@
             // StatNameBox
             // 
             this.StatNameBox.Enabled = false;
-            this.StatNameBox.Location = new System.Drawing.Point(631, 215);
+            this.StatNameBox.Location = new System.Drawing.Point(513, 217);
             this.StatNameBox.Name = "StatNameBox";
             this.StatNameBox.Size = new System.Drawing.Size(97, 183);
             this.StatNameBox.TabIndex = 6;
@@ -100,7 +101,7 @@
             // 
             this.StatLabel.AutoSize = true;
             this.StatLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.StatLabel.Location = new System.Drawing.Point(635, 173);
+            this.StatLabel.Location = new System.Drawing.Point(517, 175);
             this.StatLabel.Name = "StatLabel";
             this.StatLabel.Size = new System.Drawing.Size(93, 29);
             this.StatLabel.TabIndex = 7;
@@ -109,7 +110,7 @@
             // 
             // PlotButton
             // 
-            this.PlotButton.Location = new System.Drawing.Point(217, 426);
+            this.PlotButton.Location = new System.Drawing.Point(99, 428);
             this.PlotButton.Name = "PlotButton";
             this.PlotButton.Size = new System.Drawing.Size(58, 65);
             this.PlotButton.TabIndex = 8;
@@ -120,7 +121,7 @@
             // SampleValueBox
             // 
             this.SampleValueBox.Enabled = false;
-            this.SampleValueBox.Location = new System.Drawing.Point(317, 215);
+            this.SampleValueBox.Location = new System.Drawing.Point(199, 217);
             this.SampleValueBox.Name = "SampleValueBox";
             this.SampleValueBox.Size = new System.Drawing.Size(86, 183);
             this.SampleValueBox.TabIndex = 9;
@@ -129,7 +130,7 @@
             // StatValueBox
             // 
             this.StatValueBox.Enabled = false;
-            this.StatValueBox.Location = new System.Drawing.Point(734, 215);
+            this.StatValueBox.Location = new System.Drawing.Point(616, 217);
             this.StatValueBox.Name = "StatValueBox";
             this.StatValueBox.Size = new System.Drawing.Size(87, 183);
             this.StatValueBox.TabIndex = 10;
@@ -158,7 +159,7 @@
             // 
             // ConfigButton
             // 
-            this.ConfigButton.Location = new System.Drawing.Point(309, 426);
+            this.ConfigButton.Location = new System.Drawing.Point(191, 428);
             this.ConfigButton.Name = "ConfigButton";
             this.ConfigButton.Size = new System.Drawing.Size(105, 65);
             this.ConfigButton.TabIndex = 13;
@@ -168,7 +169,7 @@
             // 
             // ResultButton
             // 
-            this.ResultButton.Location = new System.Drawing.Point(631, 426);
+            this.ResultButton.Location = new System.Drawing.Point(513, 428);
             this.ResultButton.Name = "ResultButton";
             this.ResultButton.Size = new System.Drawing.Size(97, 65);
             this.ResultButton.TabIndex = 14;
@@ -177,11 +178,21 @@
             this.ResultButton.Visible = false;
             this.ResultButton.Click += new System.EventHandler(this.ResultButton_Click);
             // 
+            // ParallelResultBox
+            // 
+            this.ParallelResultBox.Enabled = false;
+            this.ParallelResultBox.Location = new System.Drawing.Point(767, 217);
+            this.ParallelResultBox.Name = "ParallelResultBox";
+            this.ParallelResultBox.Size = new System.Drawing.Size(225, 183);
+            this.ParallelResultBox.TabIndex = 15;
+            this.ParallelResultBox.Text = "";
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1068, 628);
+            this.Controls.Add(this.ParallelResultBox);
             this.Controls.Add(this.ResultButton);
             this.Controls.Add(this.ConfigButton);
             this.Controls.Add(this.GreenLight);
@@ -220,6 +231,7 @@
         private System.Windows.Forms.PictureBox GreenLight;
         private System.Windows.Forms.Button ConfigButton;
         private System.Windows.Forms.Button ResultButton;
+        private System.Windows.Forms.RichTextBox ParallelResultBox;
     }
 }
 

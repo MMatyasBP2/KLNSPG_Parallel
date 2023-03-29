@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
@@ -79,5 +80,7 @@ namespace StatisticalApp
 
             ChartController.Charting(Statistics.SampleCount, Chart);
         }
+
+        private void ConfigButton_Click(object sender, EventArgs e) => Process.Start("appconfig.json");
     }
 }

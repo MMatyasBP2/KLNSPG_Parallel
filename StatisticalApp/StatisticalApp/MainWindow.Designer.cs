@@ -40,6 +40,7 @@
             this.StatValueBox = new System.Windows.Forms.RichTextBox();
             this.RedLight = new System.Windows.Forms.PictureBox();
             this.GreenLight = new System.Windows.Forms.PictureBox();
+            this.ConfigButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.RedLight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GreenLight)).BeginInit();
             this.SuspendLayout();
@@ -154,11 +155,22 @@
             this.GreenLight.TabStop = false;
             this.GreenLight.Visible = false;
             // 
+            // ConfigButton
+            // 
+            this.ConfigButton.Location = new System.Drawing.Point(309, 426);
+            this.ConfigButton.Name = "ConfigButton";
+            this.ConfigButton.Size = new System.Drawing.Size(105, 65);
+            this.ConfigButton.TabIndex = 13;
+            this.ConfigButton.Text = "Open configuration file";
+            this.ConfigButton.UseVisualStyleBackColor = true;
+            this.ConfigButton.Click += new System.EventHandler(this.ConfigButton_Click);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1068, 628);
+            this.Controls.Add(this.ConfigButton);
             this.Controls.Add(this.GreenLight);
             this.Controls.Add(this.RedLight);
             this.Controls.Add(this.StatValueBox);
@@ -193,6 +205,7 @@
         private System.Windows.Forms.RichTextBox StatValueBox;
         private System.Windows.Forms.PictureBox RedLight;
         private System.Windows.Forms.PictureBox GreenLight;
+        private System.Windows.Forms.Button ConfigButton;
     }
 }
 

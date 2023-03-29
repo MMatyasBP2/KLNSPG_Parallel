@@ -52,8 +52,7 @@ namespace StatisticalApp
                 lightingThread.IsBackground = true;
                 lightingThread.Start();
 
-                var samplingTask = Task.Run(() => Statistics.Sampling(Chart, SampleNameBox, SampleValueBox, Results));
-                await samplingTask;
+                await Statistics.Sampling(Chart, SampleNameBox, SampleValueBox, Results);
 
                 lightingThread.Abort();
                 GreenLight.Visible = false;
@@ -61,8 +60,6 @@ namespace StatisticalApp
             catch (OperationCanceledException)
             {
             }
-
-            var stopwatch = Stopwatch.StartNew();
 
             StatLabel.Visible = true;
             StatNameBox.Visible = true;
@@ -72,10 +69,6 @@ namespace StatisticalApp
 
             StatNameBox.Text = string.Join(Environment.NewLine, Results.Select(kv => $"{kv.Key}:"));
             StatValueBox.Text = string.Join(Environment.NewLine, Results.Select(kv => $"{kv.Value}"));
-
-            stopwatch.Stop();
-
-            ParallelResultBox.Text = $"A művelet {stopwatch.ElapsedMilliseconds} ms alatt futott le.";
         }
 
         private void Lighting() => LedUpdate.ModifyLedActivity(isRunning, GreenLight);

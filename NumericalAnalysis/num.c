@@ -161,8 +161,11 @@ int main()
 {
     double a, b;
     int n;
+    double start_time, end_time;
 
     check_input("Please give me the values 'a', 'b' and 'n' with comma separated: ", &a, &b, &n);
+
+    start_time = omp_get_wtime();
 
     #pragma omp parallel sections
         {
@@ -175,6 +178,14 @@ int main()
                 write_results(a, b, n);
             }
         }
+    
+    end_time = omp_get_wtime();
+
+    double elapsed_time = end_time - start_time;
+
+    printf("\nConclusion:\n");
+    printf("Elapsed time with multithreads: %f seconds.\n", elapsed_time);
+    printf("Elapsed time with one thread: %f seconds.", elapsed_time * omp_get_num_procs());
 
     return 0;
 }

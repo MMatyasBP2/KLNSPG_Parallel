@@ -30,6 +30,7 @@ namespace StatisticalApp.Managing
         public Normal Normal = Normal.WithMeanStdDev(0, 1);
         public CancellationTokenSource cts;
         private readonly object FileLocker = new object();
+        public List<double> Samples = new List<double>();
         public StatisticsController()
         {
             JObject jConfig = JsonConvert.DeserializeObject<JObject>(File.ReadAllText("appconfig.json"));
@@ -63,27 +64,18 @@ namespace StatisticalApp.Managing
 
             for (int i = 0; i < SampleCount; i++)
             {
-                chart.Series[0].Points.Clear();
-
-                List<double> samples = AddSamplesToList();
-
-                var histogram = new Histogram(samples, 10);
-                for (int j = 0; j < histogram.BucketCount; j++)
-                {
-                    chart.Series[0].Points.AddXY(histogram[j].LowerBound, histogram[j].Count);
-                }
-                chart.Invalidate();
+                Samples = AddSamplesToList();
                 
-                Min = CalcMin(samples);
-                Max = CalcMax(samples);
-                Mean = CalcMean(samples);
-                Median = CalcMedian(samples);
-                STD = CalcSTD(samples);
-                Variance = CalcVariance(samples);
-                RMS = CalcRMS(samples);
-                Skewness = CalcSkewness(samples);
-                Kurtosis = CalcKurtosis(samples);
-                Covariance = CalcCovariance(samples);
+                Min = CalcMin(Samples);
+                Max = CalcMax(Samples);
+                Mean = CalcMean(Samples);
+                Median = CalcMedian(Samples);
+                STD = CalcSTD(Samples);
+                Variance = CalcVariance(Samples);
+                RMS = CalcRMS(Samples);
+                Skewness = CalcSkewness(Samples);
+                Kurtosis = CalcKurtosis(Samples);
+                Covariance = CalcCovariance(Samples);
 
                 FillResultDictionary(i + 1, Results);
 

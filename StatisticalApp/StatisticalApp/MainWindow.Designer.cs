@@ -90,7 +90,7 @@
             // StatNameBox
             // 
             this.StatNameBox.Enabled = false;
-            this.StatNameBox.Location = new System.Drawing.Point(513, 217);
+            this.StatNameBox.Location = new System.Drawing.Point(437, 217);
             this.StatNameBox.Name = "StatNameBox";
             this.StatNameBox.Size = new System.Drawing.Size(97, 183);
             this.StatNameBox.TabIndex = 6;
@@ -101,7 +101,7 @@
             // 
             this.StatLabel.AutoSize = true;
             this.StatLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.StatLabel.Location = new System.Drawing.Point(517, 175);
+            this.StatLabel.Location = new System.Drawing.Point(441, 175);
             this.StatLabel.Name = "StatLabel";
             this.StatLabel.Size = new System.Drawing.Size(93, 29);
             this.StatLabel.TabIndex = 7;
@@ -130,7 +130,7 @@
             // StatValueBox
             // 
             this.StatValueBox.Enabled = false;
-            this.StatValueBox.Location = new System.Drawing.Point(616, 217);
+            this.StatValueBox.Location = new System.Drawing.Point(540, 217);
             this.StatValueBox.Name = "StatValueBox";
             this.StatValueBox.Size = new System.Drawing.Size(87, 183);
             this.StatValueBox.TabIndex = 10;
@@ -169,7 +169,7 @@
             // 
             // ResultButton
             // 
-            this.ResultButton.Location = new System.Drawing.Point(513, 428);
+            this.ResultButton.Location = new System.Drawing.Point(437, 428);
             this.ResultButton.Name = "ResultButton";
             this.ResultButton.Size = new System.Drawing.Size(97, 65);
             this.ResultButton.TabIndex = 14;
@@ -181,9 +181,9 @@
             // ParallelResultBox
             // 
             this.ParallelResultBox.Enabled = false;
-            this.ParallelResultBox.Location = new System.Drawing.Point(767, 217);
+            this.ParallelResultBox.Location = new System.Drawing.Point(694, 217);
             this.ParallelResultBox.Name = "ParallelResultBox";
-            this.ParallelResultBox.Size = new System.Drawing.Size(225, 183);
+            this.ParallelResultBox.Size = new System.Drawing.Size(362, 100);
             this.ParallelResultBox.TabIndex = 15;
             this.ParallelResultBox.Text = "";
             this.ParallelResultBox.Visible = false;

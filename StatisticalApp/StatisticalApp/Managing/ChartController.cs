@@ -14,19 +14,18 @@ namespace StatisticalApp.Managing
 
         public static Chart SetupChartSettings()
         {
-            Chart Chart = new Chart();
-            var chartArea = new ChartArea();
-            chartArea.AlignmentOrientation = AreaAlignmentOrientations.Vertical;
-            chartArea.AxisX.Title = "Sample Value";
-            chartArea.AxisY.Title = "Relative Frequency";
-            Chart.ChartAreas.Add(chartArea);
+            var chart = new Chart();
+            chart.ChartAreas.Add(new ChartArea("Default"));
 
-            var series = new System.Windows.Forms.DataVisualization.Charting.Series();
-            series.ChartType = SeriesChartType.Line;
-            series.BorderWidth = 3;
-            Chart.Series.Add(series);
+            chart.ChartAreas[0].AxisX.Minimum = 0;
+            chart.ChartAreas[0].AxisX.Maximum = 10;
+            chart.ChartAreas[0].AxisY.Minimum = -5;
+            chart.ChartAreas[0].AxisY.Maximum = 5;
 
-            return Chart;
+            chart.Series.Add(new Series());
+            chart.Series[0].ChartType = SeriesChartType.Column;
+
+            return chart;
         }
 
         public static void Charting(int SampleCount, Chart chart)

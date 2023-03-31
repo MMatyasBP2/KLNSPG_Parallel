@@ -10,6 +10,37 @@
 
 int distance[NUM_CARS];
 int winner = -1;
+pthread_t threads[NUM_CARS];
+
+void *car_race(void *arg);
+void write_distances_to_file();
+void write_winner_to_file();
+void print_race_results();
+
+int main() {
+    int ids[NUM_CARS];
+
+    for (int i = 0; i < NUM_CARS; i++) {
+        ids[i] = i;
+        printf("Creating thread for car %d.\n", i);
+        pthread_create(&threads[i], NULL, car_race, &ids[i]);
+    }
+
+    printf("All threads created.\n");
+
+    for (int i = 0; i < NUM_CARS; i++) {
+        pthread_join(threads[i], NULL);
+        printf("Thread for car %d has joined.\n", i);
+    }
+
+    printf("All threads joined.\n");
+
+    write_distances_to_file();
+    write_winner_to_file();
+    print_race_results();
+
+    return 0;
+}
 
 void *car_race(void *arg) {
     int id = *(int*)arg;
@@ -35,31 +66,13 @@ void *car_race(void *arg) {
     pthread_exit(NULL);
 }
 
-int main() {
-    pthread_t threads[NUM_CARS];
-    int ids[NUM_CARS];
-
-    for (int i = 0; i < NUM_CARS; i++) {
-        ids[i] = i;
-        printf("Creating thread for car %d.\n", i);
-        pthread_create(&threads[i], NULL, car_race, &ids[i]);
-    }
-
-    printf("All threads created.\n");
-
-    for (int i = 0; i < NUM_CARS; i++) {
-        pthread_join(threads[i], NULL);
-        printf("Thread for car %d has joined.\n", i);
-    }
-
-    printf("All threads joined.\n");
-
+void write_distances_to_file() {
     FILE *fptr;
     fptr = fopen("distances.txt", "w");
 
     if (fptr == NULL) {
         printf("Error opening file.\n");
-        return 1;
+        exit(1);
     }
 
     for (int i = 0; i < NUM_CARS; i++) {
@@ -69,57 +82,15 @@ int main() {
     fclose(fptr);
 
     printf("Distances written to file.\n");
+}
 
-    fptr = fopen("distances.txt", "r");
-
-    if (fptr == NULL) {
-        printf("Error opening file.\n");
-        return 1;
-    }
-
-    int max_distance = 0;
-    int winner_id = -1;
-    char line[100];
-
-    while (fgets(line, sizeof(line), fptr)) {
-        int distance;
-        sscanf(line, "Car %*d: %d meters", &distance);
-
-        if (distance > max_distance) {
-            max_distance = distance;
-            winner_id = atoi(&line[4]);
-        }
-    }
-
-    fclose(fptr);
-
+void write_winner_to_file() {
+    FILE *fptr;
     fptr = fopen("winner.txt", "w");
 
     if (fptr == NULL) {
         printf("Error opening file.\n");
-        return 1;
-    }
-
-    fprintf(fptr, "Winner: Car %d (Thread %lu)\n", winner_id, threads[winner_id]);
-    fclose(fptr);
-
-    printf("Winner written to file.\n");
-
-    printf("Race results:\n");
-    for (int i = 0; i < NUM_CARS; i++) 
-        printf("Car %d (Thread %lu) finished at position %d.\n", i, threads[i], distance[i] < MAX_DISTANCE ? -1 : 1);
-
-    if (winner != -1)
-       printf("Winner: Car %d (Thread %lu)!\n", winner, threads[winner]);
-    else
-        printf("No winner found.\n");
-        
-    fptr = fopen("winner.txt", "w");
-
-    if (fptr == NULL)
-    {
-        printf("Error opening file.\n");
-        return 1;
+        exit(1);
     }
 
     if (winner != -1)
@@ -129,5 +100,17 @@ int main() {
 
     fclose(fptr);
 
-    return 0;
+    printf("Winner written to file.\n");
+}
+
+void print_race_results() {
+    printf("Race results:\n");
+
+    for (int i = 0; i < NUM_CARS; i++) 
+        printf("Car %d (Thread %lu) finished at position %d.\n", i, threads[i], distance[i] < MAX_DISTANCE ? -1 : 1);
+
+    if (winner != -1)
+        printf("Winner: Car %d (Thread %lu)!\n", winner, threads[winner]);
+    else
+        printf("No winner found.\n");
 }

@@ -1,2 +1,2 @@
 all:
-	gcc -pthread -Iinclude/ src/Car.c -o Car 
+	gcc -fopenmp -Iinclude/ src/Car.c -o Car 

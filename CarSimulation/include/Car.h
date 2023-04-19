@@ -1,24 +1,21 @@
 #ifndef CAR_H
 #define CAR_H
 
+#include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <pthread.h>
 #include <time.h>
-#include <Windows.h>
 
-#define NUM_CARS 5
-#define MAX_DISTANCE 1000
-#define MAX_SPEED 200
+#define NUM_CARS 10
+#define RACE_DISTANCE 1000000000
 
-int distance[NUM_CARS];
-int winner = -1;
-pthread_t threads[NUM_CARS];
+typedef struct {
+    int car_id;
+    int time;
+} car_data;
+
+void *race(void *arg);
+int compare(const void *a, const void *b);
 
 
-void *car_race(void *arg);
-void write_distances_to_file();
-void write_winner_to_file();
-void print_race_results();
-
-#endif 
+#endif

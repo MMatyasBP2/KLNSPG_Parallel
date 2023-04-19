@@ -1,6 +1,7 @@
 {
     "C_Cpp.errorSquiggles": "disabled",
     "files.associations": {
-        "omp.h": "c"
+        "omp.h": "c",
+        "car.h": "c"
     }
 }

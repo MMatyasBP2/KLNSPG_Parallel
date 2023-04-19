@@ -1,99 +1,65 @@
 #include "Car.h"
 
-int main() {
-    int ids[NUM_CARS];
+void *race(void *arg)
+{
+    car_data *data = (car_data *)arg;
+    int distance = 0;
 
-    for (int i = 0; i < NUM_CARS; i++) {
-        ids[i] = i;
-        printf("Creating thread for car %d.\n", i);
-        pthread_create(&threads[i], NULL, car_race, &ids[i]);
+    printf("Car %d started racing.\n", data->car_id);
+
+    while (distance < RACE_DISTANCE) {
+        distance += rand() % 50 + 1;
+        data->time += rand() % 100 + 1;
     }
 
-    printf("All threads created.\n");
+    printf("Car %d finished the race in %d time units.\n", data->car_id, data->time);
+    return NULL;
+}
 
+int compare(const void *a, const void *b)
+{
+    car_data *car_a = (car_data *)a;
+    car_data *car_b = (car_data *)b;
+
+    return car_a->time - car_b->time;
+}
+
+int main()
+{
+    srand(time(NULL));
+    pthread_t cars[NUM_CARS];
+    car_data car_results[NUM_CARS];
+
+    clock_t start_multi = clock();
     for (int i = 0; i < NUM_CARS; i++) {
-        pthread_join(threads[i], NULL);
-        printf("Thread for car %d has joined.\n", i);
+        car_results[i].car_id = i + 1;
+        car_results[i].time = 0;
+        pthread_create(&cars[i], NULL, race, (void *)&car_results[i]);
     }
 
-    printf("All threads joined.\n");
+    for (int i = 0; i < NUM_CARS; i++) {
+        pthread_join(cars[i], NULL);
+    }
+    clock_t end_multi = clock();
 
-    write_distances_to_file();
-    write_winner_to_file();
-    print_race_results();
+    qsort(car_results, NUM_CARS, sizeof(car_data), compare);
+
+    printf("\nRanking:\n");
+    for (int i = 0; i < NUM_CARS; i++) {
+        printf("%d. place: Car %d (%d time units)\n", i + 1, car_results[i].car_id, car_results[i].time);
+    }
+
+    clock_t start_single = clock();
+    for (int i = 0; i < NUM_CARS; i++) {
+        race((void *)&car_results[i]);
+    }
+    clock_t end_single = clock();
+
+    double time_multi = (double)(end_multi - start_multi) / CLOCKS_PER_SEC;
+    double time_single = (double)(end_single - start_single) / CLOCKS_PER_SEC;
+
+    printf("\nMulti-threaded execution time: %f seconds\n", time_multi);
+    printf("Single-threaded execution time: %f seconds\n", time_single);
 
     return 0;
-}
-
-void *car_race(void *arg) {
-    int id = *(int*)arg;
-    int traveled = 0;
-    srand(time(NULL) + id);
-
-    while (traveled < MAX_DISTANCE) {
-        int speed = rand() % MAX_SPEED + 1;
-        traveled += speed;
-        distance[id] = traveled;
-
-        printf("Car %d has traveled %d meters.\n", id, traveled);
-
-        if (traveled >= MAX_DISTANCE) {
-            winner = id;
-            printf("Car %d has crossed the finish line.\n", id);
-            break;
-        }
-
-        Sleep(100);
-    }
-
-    pthread_exit(NULL);
-}
-
-void write_distances_to_file() {
-    FILE *fptr;
-    fptr = fopen("distances.txt", "w");
-
-    if (fptr == NULL) {
-        printf("Error opening file.\n");
-        exit(1);
-    }
-
-    for (int i = 0; i < NUM_CARS; i++) {
-        fprintf(fptr, "Car %d: %d meters\n", i, distance[i]);
-    }
-
-    fclose(fptr);
-
-    printf("Distances written to file.\n");
-}
-
-void write_winner_to_file() {
-    FILE *fptr;
-    fptr = fopen("winner.txt", "w");
-
-    if (fptr == NULL) {
-        printf("Error opening file.\n");
-        exit(1);
-    }
-
-    if (winner != -1)
-        fprintf(fptr, "Winner: Car %d (Thread %lu)\n", winner, threads[winner]);
-    else 
-        fprintf(fptr, "No winner found.\n");
-
-    fclose(fptr);
-
-    printf("Winner written to file.\n");
-}
-
-void print_race_results() {
-    printf("Race results:\n");
-
-    for (int i = 0; i < NUM_CARS; i++) 
-        printf("Car %d (Thread %lu) finished at position %d.\n", i, threads[i], distance[i] < MAX_DISTANCE ? -1 : 1);
-
-    if (winner != -1)
-        printf("Winner: Car %d (Thread %lu)!\n", winner, threads[winner]);
-    else
-        printf("No winner found.\n");
 }

@@ -1,5 +1,0 @@
-Car 0: 1023 meters
-Car 1: 1019 meters
-Car 2: 1096 meters
-Car 3: 1129 meters
-Car 4: 1157 meters

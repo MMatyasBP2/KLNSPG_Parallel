@@ -1,8 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
-#include <omp.h>
-#include <stdbool.h>
+#include "Num.h"
 
 double f(double x)
 {
@@ -74,7 +70,8 @@ double simpson_integration_1_3(double a, double b, int n)
     return h / 3.0 * sum;
 }
 
-double simpson_integration_3_8(double a, double b, int n) {
+double simpson_integration_3_8(double a, double b, int n)
+{
     double h = (b - a) / n;
     double sum = f(a) + f(b);
     #pragma omp parallel for reduction(+:sum)

@@ -156,33 +156,12 @@ void check_input(char* msg, double* a, double* b, int* n)
 
 int main()
 {
-    double a, b;
-    int n;
-    double start_time, end_time;
+    double a = atof(getenv("a"));
+    double b = atof(getenv("b"));
+    int n = atoi(getenv("n"));
 
-    check_input("Please give me the values 'a', 'b' and 'n' with comma separated: ", &a, &b, &n);
-
-    start_time = omp_get_wtime();
-
-    #pragma omp parallel sections
-        {
-    #pragma omp section
-            {
-                print_results(a, b, n);
-            }
-    #pragma omp section
-            {
-                write_results(a, b, n);
-            }
-        }
-    
-    end_time = omp_get_wtime();
-
-    double elapsed_time = end_time - start_time;
-
-    printf("\nConclusion:\n");
-    printf("Elapsed time with multithreads: %f seconds.\n", elapsed_time);
-    printf("Elapsed time with one thread: %f seconds.", elapsed_time * omp_get_num_procs());
+    print_results(a, b, n);
+    write_results(a, b, n);
 
     return 0;
 }

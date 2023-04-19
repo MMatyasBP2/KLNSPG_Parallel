@@ -7,6 +7,8 @@
 #include <omp.h>
 #include <stdbool.h>
 
+#define MAX_N 1000000
+
 double f(double x);
 double df(double x);
 double ddf(double x);

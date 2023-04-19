@@ -2,6 +2,7 @@
     "C_Cpp.errorSquiggles": "disabled",
     "files.associations": {
         "omp.h": "c",
-        "car.h": "c"
+        "car.h": "c",
+        "stdlib.h": "c"
     }
 }

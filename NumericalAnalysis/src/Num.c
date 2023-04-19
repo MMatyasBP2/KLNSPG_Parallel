@@ -125,35 +125,6 @@ void write_results(double a, double b, int n)
     fclose(f);
 }
 
-void check_input(char* msg, double* a, double* b, int* n)
-{
-    bool ok;
-
-    do
-    {
-        ok = true;
-        puts(msg);
-        if (scanf("%lf, %lf, %d", a, b, n) != 3)
-        {
-            printf("Wrong input! Please retry!\n");
-            while ((getchar()) != '\n');
-            ok = false;
-        }
-        else if (*a <= 0 || *b <= 0 || *a == *b)
-        {
-            printf("Wrong input! Numbers must be positive!\n");
-            while ((getchar()) != '\n');
-            ok = false;
-        }
-        else if (*n <= 0 || *n > 1000000)
-        {
-            printf("Wrong input! Length must be between 0 and 1.000.000!\n");
-            while ((getchar()) != '\n');
-            ok = false;
-        } 
-    } while (!ok);
-}
-
 int main()
 {
     double a = atof(getenv("a"));

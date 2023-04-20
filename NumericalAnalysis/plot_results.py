@@ -1,32 +1,32 @@
-import os
-import subprocess
-import numpy as np
 import matplotlib.pyplot as plt
 
-def run_c_code(a, b, n):
-    os.environ['a'] = str(a)
-    os.environ['b'] = str(b)
-    os.environ['n'] = str(n)
-
-    output = subprocess.check_output("./Num").decode("utf-8")
-    results = [float(line.split(':')[-1]) for line in output.split('\n') if ':' in line]
-
-    return results
+def read_results(filename):
+    times = []
+    with open(filename, "r") as f:
+        for line in f.readlines():
+            data = line.strip().split(',')
+            for time_str in data[:-1]:
+                time = float(time_str)
+                times.append(time)
+    return times
 
 def main():
-    a_values = np.linspace(1, 10, 10)
-    b_values = np.linspace(1, 10, 10)
-    n_values = np.linspace(1000, 10000, 10, dtype=int)
+    x = list(range(1, 9))
 
-    for a, b, n in zip(a_values, b_values, n_values):
-        results = run_c_code(a, b, n)
-        plt.plot(results, label=f'a={a}, b={b}, n={n}')
+    sequential_times = read_results("sequential_results.txt")
+    if len(sequential_times) == len(x):
+        plt.plot(x, sequential_times, label="Sequential", marker="o")
 
-    plt.xlabel('Method')
-    plt.ylabel('Result')
+    parallel_times = read_results("parallel_results.txt")
+    if len(parallel_times) == len(x):
+        plt.plot(x, parallel_times, label="Parallel", marker="o")
+
+    plt.xlabel("Method")
+    plt.ylabel("Execution Time (s)")
+    plt.title("Execution Time Comparison")
     plt.legend()
-    plt.title('Numerical Methods Results')
-    plt.xticks(range(8), ['Newton', 'Taylor 1st', 'Taylor 2nd', 'Trap. Mid', 'Trap. Left', 'Trap. Right', 'Simp. 1/3', 'Simp. 3/8'])
+    plt.xticks(range(1, 9), ['Newton', 'Taylor 1st', 'Taylor 2nd', 'Trap. Mid', 'Trap. Left', 'Trap. Right', 'Simp. 1/3', 'Simp. 3/8'])
+    plt.grid()
     plt.show()
 
 if __name__ == "__main__":

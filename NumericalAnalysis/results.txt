@@ -1,9 +1,11 @@
-Results with 'a' = 10.00, 'b' = 10.00, 'n' = 10000:
-Numerical derivative (Newton method): -0.836337
-1st order derivative (Taylor polynom): -0.839058
-2nd order derivative (Taylor polynom): 0.544017
-Trapezoidal integration (mid-point rule): -0.000000
-Trapezoidal integration (left-end rule): -0.000000
-Trapezoidal integration (right-end rule): -0.000000
-Simpson integration (1/3 rule): -0.000000
-Simpson integration (3/8 rule): -0.000000
+Results with 'a' = 1.00, 'b' = 1000000.00, 'n' = 2:
+Numerical derivative (Newton method): 0.536086
+1st order derivative (Taylor polynom): 0.540293
+2nd order derivative (Taylor polynom): -0.841464
+Trapezoidal integration (mid-point rule): 105107.970297
+Trapezoidal integration (left-end rule): 350372.309341
+Trapezoidal integration (right-end rule): -543225.162295
+Simpson integration (1/3 rule): 643228.047257
+Simpson integration (3/8 rule): 996552.084760
+Elapsed time with multithreads: -1682021448.225000
+Elapsed time with one thread: -13456171585.799999

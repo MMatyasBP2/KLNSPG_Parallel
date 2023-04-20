@@ -3,6 +3,7 @@
     "files.associations": {
         "omp.h": "c",
         "car.h": "c",
-        "stdlib.h": "c"
+        "stdlib.h": "c",
+        "math.h": "c"
     }
 }

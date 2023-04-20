@@ -3,25 +3,17 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
+#include <time.h>
 #include <omp.h>
-#include <stdbool.h>
+#include <math.h>
 
-#define MAX_N 1000000
-
-double f(double x);
-double df(double x);
-double ddf(double x);
-double trapezoidal_integration_mid(double a, double b, int n);
-double trapezoidal_integration_left(double a, double b, int n);
-double trapezoidal_integration_right(double a, double b, int n);
-double simpson_integration_1_3(double a, double b, int n);
-double simpson_integration_3_8(double a, double b, int n);
-double newton_deriv(double a, double h);
-double taylor_1_deriv(double a, double h);
-double taylor_2_deriv(double a, double h);
-void print_results(double a, double b, int n);
-void write_results(double a, double b, int n);
-void check_input(char* msg, double* a, double* b, int* n);
+double newton();
+double taylor_first();
+double taylor_second();
+double trapezoid_midpoint();
+double trapezoid_left();
+double trapezoid_right();
+double simpson_one_third();
+double simpson_three_eighth();
 
 #endif 

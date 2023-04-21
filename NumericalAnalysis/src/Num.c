@@ -3,7 +3,7 @@
 double newton()
 {
     double x = 1.0;
-    for (int i = 0; i < 1000000000; i++) {
+    for (int i = 0; i < 10000; i++) {
         x = x - (x * x - 2) / (2 * x);
     }
     return x;
@@ -13,7 +13,7 @@ double taylor_first()
 {
     double x = 1.0;
     double sum = 0.0;
-    for (int i = 0; i < 1000000000; i++) {
+    for (int i = 0; i < 10000; i++) {
         sum += pow(-1, i) * pow(x, 2 * i + 1) / (2 * i + 1);
     }
     return sum;
@@ -23,7 +23,7 @@ double taylor_second()
 {
     double x = 1.0;
     double sum = 0.0;
-    for (int i = 0; i < 1000000000; i++) {
+    for (int i = 0; i < 10000; i++) {
         sum += pow(-1, i) * pow(x, 4 * i + 1) / (4 * i + 1);
     }
     return sum;
@@ -32,7 +32,7 @@ double taylor_second()
 double trapezoid_midpoint()
 {
     double a = 0.0, b = 1.0;
-    int n = 1000000000;
+    int n = 10000;
     double h = (b - a) / n;
     double sum = 0.0;
     for (int i = 1; i < n; i++) {
@@ -45,7 +45,7 @@ double trapezoid_midpoint()
 double trapezoid_left()
 {
     double a = 0.0, b = 1.0;
-    int n = 1000000000;
+    int n = 10000;
     double h = (b - a) / n;
     double sum = 0.0;
     for (int i = 0; i < n; i++) {
@@ -58,7 +58,7 @@ double trapezoid_left()
 double trapezoid_right()
 {
     double a = 0.0, b = 1.0;
-    int n = 1000000000;
+    int n = 10000;
     double h = (b - a) / n;
     double sum = 0.0;
     for (int i = 1; i <= n; i++) {
@@ -71,7 +71,7 @@ double trapezoid_right()
 double simpson_one_third()
 {
     double a = 0.0, b = 1.0;
-    int n = 1000000000;
+    int n = 10000;
     double h = (b - a) / n;
     double sum = 0.0;
     for (int i = 1; i <= n / 2; i++) {
@@ -88,7 +88,7 @@ double simpson_one_third()
 double simpson_three_eighth()
 {
     double a = 0.0, b = 1.0;
-    int n = 1000000000;
+    int n = 10000;
     double h = (b - a) / n;
     double sum = 0.0;
     for (int i = 0; i < n; i += 3) {
@@ -103,7 +103,7 @@ double simpson_three_eighth()
 
 int main() {
     double (*methods[])() = {newton, taylor_first, taylor_second, trapezoid_midpoint, trapezoid_left, trapezoid_right, simpson_one_third, simpson_three_eighth};
-    int num_methods = sizeof(methods) / sizeof(methods[0]);
+    const int num_methods = 1000000;
 
     FILE *sequential_file = fopen("sequential_results.txt", "w");
     FILE *parallel_file = fopen("parallel_results.txt", "w");

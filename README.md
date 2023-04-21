@@ -10,7 +10,7 @@ OpenMP: Numerikus integrációs módszerek összehasonlítása szekvenciális é
         - Trapéz módszer jobb végponti értékeléssel,
         - Simpson 1/3-ad szabály,
         - Simpson 3/8-ad szabály
-        A módszereket 1.000.000-szor futtatjuk le, és a futási időket külön szövegfájlokban rögzítjük. A futási időket egy Python segítségével ábrázoljuk. A Python
+        A módszereket 1.000.000-szor futtatjuk le, és a futási időket külön szövegfájlokban rögzítjük. A futási időket egy Python script segítségével ábrázoljuk. A Python
         script az eredményeket beolvassa, és grafikonon ábrázolja a szekvenciális és párhuzamos futási időket. A grafikonon az x tengely a numerikus integrációs
         módszereket mutatja, míg az y tengely a futási időt másodpercben.
 

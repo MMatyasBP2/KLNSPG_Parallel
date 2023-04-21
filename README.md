@@ -1,4 +1,4 @@
-# KLNSPG Parallel algoritms tasks:
+# Párhuzamos algoritmusok beadandó feladatok specifikációi:
 OpenMP: Numerikus integrációs módszerek összehasonlítása szekvenciális és párhuzamos futtatással.
         A projekt célja, hogy összehasonlítsa a különböző numerikus integrációs módszerek futási idejét szekvenciálisan és párhuzamosan, az OpenMP függvénykönyvtár
         használatával. A program összesen 8 módszerrel dolgozik:

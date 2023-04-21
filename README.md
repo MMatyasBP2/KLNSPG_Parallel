@@ -27,4 +27,4 @@ C#: Statisztikai mintavételezés párhuzamosítás használatával.
     CancellationTokenSource-ja, ami a Stop gomb megnyomására aktiválódik. A program futása folyamán egy led lámpa villog, ezt két kép folyamatosan felcserélgetésével
     oldjuk meg és a System.Threading függvénykönyvtárat használjuk fel hozzá. Egy új szálat hozunk létre, ami egy végtelen ciklust indít el és folyamatosan 250
     miliszekundumot várunk minden egyes képváltásnál. A képek váltása a Dispacher osztállyal működik és az Invoke metódus felel azért, hogy hozzáférjünk a kép aktuális
-    szálához.
+    száljához.

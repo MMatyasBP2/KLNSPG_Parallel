@@ -20,6 +20,7 @@ POSIX: Autóverseny szimuláció párhuzamosítással.
        és egy szálas futtatás idejét. A programban 10 autó vesz részt a versenyen. Az autók azonosítója 1-től 10-ig tart. Az autóverseny távolsága 10.000 egység. Az
        autók a verseny során véletlenszerűen haladnak előre (1-50 egység között), és eltöltött idő is véletlenszerű (1-1.000 időegység között). A verseny addig tart, amíg
        az összes autó el nem éri a maximális távolságot.
+
 C#: Statisztikai mintavételezés párhuzamosítás használatával.
     A projekt célja az egyszerű statisztikai mintavételezés párhuzamos implementálása. A program egyszerre egy időben végzi el a statisztikai mintavételezést és a
     hisztogrammmok kirajzolásást. Mindkettő funkciót egy-egy gombbal lehet elérni. A teljes mintavételezés és kiíratás egy aszinkron függvénnyel működik és van egy

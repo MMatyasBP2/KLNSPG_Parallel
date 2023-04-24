@@ -9,7 +9,8 @@ A program összesen 8 módszerrel dolgozik:
 - Trapéz módszer bal végponti értékeléssel,
 - Trapéz módszer jobb végponti értékeléssel,
 - Simpson 1/3-ad szabály,
-- Simpson 3/8-ad szabály. A módszereket 1 000 000-szor futtatjuk le, és a futási időket külön szövegfájlokban rögzítjük. A futási időket egy "Python script" segítségével ábrázoljuk. A "Python script" az eredményeket beolvassa, és grafikonon ábrázolja a szekvenciális és párhuzamos futási időket. A grafikonon az x tengely a numerikus integrációs módszereket mutatja, míg az y tengely a futási időt másodpercben.
+- Simpson 3/8-ad szabály.
+A módszereket 1 000 000-szor futtatjuk le, és a futási időket külön szövegfájlokban rögzítjük. A futási időket egy "Python script" segítségével ábrázoljuk. A "Python script" az eredményeket beolvassa, és grafikonon ábrázolja a szekvenciális és párhuzamos futási időket. A grafikonon az x tengely a numerikus integrációs módszereket mutatja, míg az y tengely a futási időt másodpercben.
 
 POSIX: Autóverseny szimuláció párhuzamosítással. A projekt célja egy egyszerű autóverseny szimuláció létrehozása "C" programozási nyelven, melyben a párhuzamos programozás előnyeit mutatjuk be. A szimuláció során több autó versenyez egymással, és mindegyik autó egy szálat kap a verseny alatt. A szimuláció végén kiírjuk a verseny rangsorát, és összehasonlítjuk a több szálas és egy szálas futtatás idejét. A programban 10 autó vesz részt a versenyen. Az autók azonosítója 1-től 10-ig tart. Az autóverseny távolsága 10 000 egység. Az autók a verseny során véletlenszerűen haladnak előre (1-50 egység között), és eltöltött idő is véletlenszerű (1-1 000 időegység között). A verseny addig tart, amíg az összes autó el nem éri a maximális távolságot.
 

@@ -7,6 +7,9 @@
 #include <omp.h>
 #include <math.h>
 
+#define NUM_METHODS 8
+#define NUM_ITERATIONS 1000000
+
 double newton();
 double taylor_first();
 double taylor_second();

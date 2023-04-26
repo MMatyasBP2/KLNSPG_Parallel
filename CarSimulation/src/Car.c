@@ -24,32 +24,43 @@ int compare(const void *a, const void *b)
     return car_a->time - car_b->time;
 }
 
-int main()
+int main(int argc, char *argv[])
 {
     srand(time(NULL));
-    pthread_t cars[NUM_CARS];
-    car_data car_results[NUM_CARS];
+
+    int num_cars = NUM_CARS;
+    if (argc > 1) {
+        int input_threads = atoi(argv[1]);
+        if (input_threads > 0) {
+            num_cars = input_threads;
+        } else {
+            printf("Invalid number of threads. Using default value: %d\n", NUM_CARS);
+        }
+    }
+
+    pthread_t cars[num_cars];
+    car_data car_results[num_cars];
 
     clock_t start_multi = clock();
-    for (int i = 0; i < NUM_CARS; i++)
+    for (int i = 0; i < num_cars; i++)
     {
         car_results[i].car_id = i + 1;
         car_results[i].time = 0;
         pthread_create(&cars[i], NULL, race, (void *)&car_results[i]);
     }
 
-    for (int i = 0; i < NUM_CARS; i++)
+    for (int i = 0; i < num_cars; i++)
         pthread_join(cars[i], NULL);
 
     clock_t end_multi = clock();
-    qsort(car_results, NUM_CARS, sizeof(car_data), compare);
+    qsort(car_results, num_cars, sizeof(car_data), compare);
 
     printf("\nRanking:\n");
-    for (int i = 0; i < NUM_CARS; i++)
+    for (int i = 0; i < num_cars; i++)
         printf("%d. place: Car %d (%d time units)\n", i + 1, car_results[i].car_id, car_results[i].time);
 
     clock_t start_single = clock();
-    for (int i = 0; i < NUM_CARS; i++)
+    for (int i = 0; i < num_cars; i++)
         race((void *)&car_results[i]);
     clock_t end_single = clock();
 

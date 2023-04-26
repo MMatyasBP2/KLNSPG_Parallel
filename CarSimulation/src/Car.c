@@ -31,28 +31,26 @@ int main()
     car_data car_results[NUM_CARS];
 
     clock_t start_multi = clock();
-    for (int i = 0; i < NUM_CARS; i++) {
+    for (int i = 0; i < NUM_CARS; i++)
+    {
         car_results[i].car_id = i + 1;
         car_results[i].time = 0;
         pthread_create(&cars[i], NULL, race, (void *)&car_results[i]);
     }
 
-    for (int i = 0; i < NUM_CARS; i++) {
+    for (int i = 0; i < NUM_CARS; i++)
         pthread_join(cars[i], NULL);
-    }
-    clock_t end_multi = clock();
 
+    clock_t end_multi = clock();
     qsort(car_results, NUM_CARS, sizeof(car_data), compare);
 
     printf("\nRanking:\n");
-    for (int i = 0; i < NUM_CARS; i++) {
+    for (int i = 0; i < NUM_CARS; i++)
         printf("%d. place: Car %d (%d time units)\n", i + 1, car_results[i].car_id, car_results[i].time);
-    }
 
     clock_t start_single = clock();
-    for (int i = 0; i < NUM_CARS; i++) {
+    for (int i = 0; i < NUM_CARS; i++)
         race((void *)&car_results[i]);
-    }
     clock_t end_single = clock();
 
     double time_multi = (double)(end_multi - start_multi) / CLOCKS_PER_SEC;

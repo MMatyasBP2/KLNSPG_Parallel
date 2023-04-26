@@ -103,10 +103,12 @@ double simpson_three_eighth()
 
 int main() {
     double (*methods[])() = {newton, taylor_first, taylor_second, trapezoid_midpoint, trapezoid_left, trapezoid_right, simpson_one_third, simpson_three_eighth};
+
     FILE *sequential_file = fopen("sequential_results.txt", "w");
     FILE *parallel_file = fopen("parallel_results.txt", "w");
 
-    for (int i = 0; i < NUM_METHODS; i++) {
+    for (int i = 0; i < NUM_METHODS; i++)
+    {
         double start_time = omp_get_wtime();
         for (int j = 0; j < NUM_ITERATIONS; j++) {
             double result = methods[i]();
@@ -116,10 +118,9 @@ int main() {
         fprintf(sequential_file, "%f,", sequential_time);
 
         start_time = omp_get_wtime();
-        int method_index = i;
         #pragma omp parallel for
         for (int j = 0; j < NUM_ITERATIONS; j++) {
-            double result = methods[method_index]();
+            double result = methods[i]();
         }
         end_time = omp_get_wtime();
         double parallel_time = end_time - start_time;

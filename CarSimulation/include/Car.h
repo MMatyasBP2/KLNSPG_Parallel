@@ -7,7 +7,6 @@
 #include <time.h>
 
 #define NUM_CARS 10
-#define RACE_DISTANCE 1000000000
 
 typedef struct {
     int car_id;

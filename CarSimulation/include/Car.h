@@ -9,13 +9,13 @@
 #define NUM_CARS 10
 #define RACE_DISTANCE 1000000000
 
-typedef struct {
+typedef struct
+{
     int car_id;
     int time;
 } car_data;
 
 void *race(void *arg);
 int compare(const void *a, const void *b);
-
 
 #endif

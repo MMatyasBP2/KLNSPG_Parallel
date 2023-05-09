@@ -7,7 +7,8 @@ void *race(void *arg)
 
     printf("Car %d started racing.\n", data->car_id);
 
-    while (distance < RACE_DISTANCE) {
+    while (distance < RACE_DISTANCE)
+    {
         distance += rand() % 50 + 1;
         data->time += rand() % 100 + 1;
     }
@@ -29,13 +30,15 @@ int main(int argc, char *argv[])
     srand(time(NULL));
 
     int num_cars = NUM_CARS;
-    if (argc > 1) {
+
+    if (argc > 1)
+    {
         int input_threads = atoi(argv[1]);
-        if (input_threads > 0) {
+
+        if (input_threads > 0)
             num_cars = input_threads;
-        } else {
+        else
             printf("Invalid number of threads. Using default value: %d\n", NUM_CARS);
-        }
     }
 
     pthread_t cars[num_cars];

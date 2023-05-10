@@ -15,13 +15,22 @@ def main():
         num_methods = len(sequential_times)
         x = list(range(1, num_methods + 1))
 
-        plt.plot(x, sequential_times, label="Sequential", marker="o")
-        plt.plot(x, parallel_times, label="Parallel", marker="o")
+        speedup = [seq_time / par_time for seq_time, par_time in zip(sequential_times, parallel_times)]
 
-        plt.xlabel("Method")
-        plt.ylabel("Execution Time (s)")
-        plt.legend()
-        plt.title("Sequential vs Parallel Execution Times")
+        fig, ax1 = plt.subplots()
+
+        ax1.plot(x, sequential_times, label="Sequential", marker="o")
+        ax1.plot(x, parallel_times, label="Parallel", marker="o")
+        ax1.set_xlabel("Method")
+        ax1.set_ylabel("Execution Time (s)")
+        ax1.legend(loc="upper left")
+        ax1.set_title("Sequential vs Parallel Execution Times and Speedup")
+
+        ax2 = ax1.twinx()
+        ax2.plot(x, speedup, label="Speedup", marker="o", color="r")
+        ax2.set_ylabel("Speedup")
+        ax2.legend(loc="upper right")
+        ax2.axhline(y=1, color='gray', linestyle='--')
 
         plt.show()
     except:

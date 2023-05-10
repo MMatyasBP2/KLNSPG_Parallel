@@ -8,7 +8,7 @@
 #include <math.h>
 
 #define NUM_METHODS 8
-#define NUM_ITERATIONS 100
+#define NUM_ITERATIONS 1000
 
 double newton();
 double taylor_first();

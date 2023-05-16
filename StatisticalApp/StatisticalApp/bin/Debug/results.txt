@@ -1,13 +1,13 @@
-Results from 201 measurement from 10000 samples:
+Results from 53 measurement from 1000 samples:
 
-Sample: 201
-Minimum: -3,9530
-Maximum: -3,9530
-Mean: -0,0101
-Median: -0,0095
-STD: 0,9996
-Variance: 0,9991
-RMS: 0,9996
-Skewness: 0,0463
-Kurtosis: -0,0221
-Covariance: 0,9991
+Sample: 53
+Minimum: -3,0097
+Maximum: -3,0097
+Mean: 0,0154
+Median: 0,0403
+STD: 0,9988
+Variance: 0,9976
+RMS: 0,9984
+Skewness: -0,1316
+Kurtosis: -0,1666
+Covariance: 0,9976

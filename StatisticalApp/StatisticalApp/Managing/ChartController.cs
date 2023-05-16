@@ -4,6 +4,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms.DataVisualization.Charting;
 using System.Windows.Forms;
+using System.Linq;
+using System.Drawing;
 
 namespace StatisticalApp.Managing
 {
@@ -18,9 +20,10 @@ namespace StatisticalApp.Managing
             chart.ChartAreas.Add(new ChartArea("Default"));
 
             chart.ChartAreas[0].AxisX.Minimum = 0;
-            chart.ChartAreas[0].AxisX.Maximum = 10;
-            chart.ChartAreas[0].AxisY.Minimum = -5;
-            chart.ChartAreas[0].AxisY.Maximum = 5;
+            chart.ChartAreas[0].AxisX.Maximum = 100;
+            chart.ChartAreas[0].AxisY.Minimum = -50;
+            chart.ChartAreas[0].AxisY.Maximum = 50;
+            chart.Size = new Size(800, 600);
 
             chart.Series.Add(new Series());
             chart.Series[0].ChartType = SeriesChartType.Column;
@@ -40,11 +43,19 @@ namespace StatisticalApp.Managing
 
             Task.Run(() =>
             {
-                while (!cts.Token.IsCancellationRequested)
+                for (int i = 0; i < SampleCount; i++)
                 {
+                    if (cts.Token.IsCancellationRequested)
+                        break;
+
                     var samples = Stat.AddSamplesToList();
 
                     var histogram = new Histogram(samples, 10);
+
+                    double minX = samples.Min();
+                    double maxX = samples.Max();
+                    double minY = histogram.LowerBound;
+                    double maxY = histogram.UpperBound;
 
                     try
                     {
@@ -52,9 +63,14 @@ namespace StatisticalApp.Managing
                         {
                             chart.Series[0].Points.Clear();
 
-                            for (int i = 0; i < histogram.BucketCount; i++)
+                            chart.ChartAreas[0].AxisX.Minimum = minX;
+                            chart.ChartAreas[0].AxisX.Maximum = maxX;
+                            chart.ChartAreas[0].AxisY.Minimum = minY;
+                            chart.ChartAreas[0].AxisY.Maximum = maxY;
+
+                            for (int j = 0; j < histogram.BucketCount; j++)
                             {
-                                chart.Series[0].Points.AddXY(histogram[i].LowerBound, histogram[i].Count);
+                                chart.Series[0].Points.AddXY(histogram[j].LowerBound, histogram[j].Count);
                             }
 
                             chart.Invalidate();
@@ -78,8 +94,7 @@ namespace StatisticalApp.Managing
         private static Form GenerateChartingForm(Chart chart)
         {
             var form = new Form();
-            form.Width = 320;
-            form.Height = 350;
+            form.Size = new Size(900, 700);
             form.ShowIcon = false;
             form.Controls.Add(chart);
             return form;
